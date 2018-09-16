@@ -1,10 +1,12 @@
-[ ] logger de errores y de cada accion, y cuales usuarios lo hacen
+[ ] logger de errores y de cada accion, y cuales usuarios lo hacen. Hacer en mongo un logger?
 [ ] manejo de los errores
-[ ] Configurar un mock de mongo (se demora mucho)
 [ ] Como documentar el api, elegir una libreria
+[ ] manejo de controles de acceso
 [ ] generador de mock db o db de prueba
 [ ] dockerfile configuracion
 [ ] travis configuracion
+
+[ ] Configurar un mock de mongo (se demora mucho)
 
 ## Otros
 

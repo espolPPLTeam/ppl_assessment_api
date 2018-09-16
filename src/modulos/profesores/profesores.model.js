@@ -66,10 +66,26 @@ ProfesoresModel.statics = {
       resolve(self.find({}))
     })
   },
-  Obtener (id) {
+  Obtener ({ id }) {
     const self = this
     return new Promise(function (resolve) {
       resolve(self.findOne({ _id: id }))
+    })
+  },
+  AnadirParalelo ({ profesoresId, paralelosId }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: profesoresId }, { $addToSet: { 'paralelos': paralelosId } }).then((accionEstado) => {
+        resolve(accionEstado.nModified !== 0)
+      })
+    })
+  },
+  EliminarParalelo ({ profesoresId, paralelosId }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: profesoresId }, { $pull: { 'paralelos': paralelosId } }).then((accionEstado) => {
+        resolve(accionEstado.nModified !== 0)
+      })
     })
   }
 }

@@ -26,7 +26,7 @@
 
 [ ] Capitulos
 
-[ ] Estudiantes
+[ ] Estudiantes /
 
 [ ] Grupos
 
@@ -38,7 +38,7 @@
 
 [ ] Preguntas
 
-[ ] Profesores
+[ ] Profesores /
 
 [ ] Respuestas
 

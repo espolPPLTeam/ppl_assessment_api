@@ -1,4 +1,7 @@
 module.exports = {
   materias: require('./materias'),
-  paralelos: require('./paralelos')
+  paralelos: require('./paralelos'),
+  estudiantes: require('./estudiantes'),
+  grupos: require('./grupos'),
+  profesores: require('./profesores')
 }

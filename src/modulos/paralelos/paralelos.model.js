@@ -103,7 +103,7 @@ ParalelosSchema.statics = {
   EliminarEstudiante ({ paralelosId, estudiantesId }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({ _id: paralelosId }, { $pull: { 'estudiantes': estudiantesId } }).then((accionEstado) => {
+      self.updateOne({$and: [{ _id: paralelosId }, { 'estudiantes': { $in : [estudiantesId] } }]}, { $pull: { 'estudiantes': estudiantesId } }).then((accionEstado) => {
         resolve(accionEstado.nModified !== 0)
       })
     })

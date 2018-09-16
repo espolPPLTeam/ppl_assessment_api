@@ -21,9 +21,8 @@ const EstudiantesSchema = mongoose.Schema({
     type: String
   },
   matricula: {
-    type: String,
-    required: true,
-    unique: true
+    type: String
+    // unique: true, verificar si da error esto cuando es vacio
   },
   correo: {
     type: String,
@@ -77,10 +76,26 @@ EstudiantesSchema.statics = {
       resolve(self.find({}))
     })
   },
-  Obtener (id) {
+  Obtener ({ id }) {
     const self = this
     return new Promise(function (resolve) {
       resolve(self.findOne({ _id: id }))
+    })
+  },
+  AnadirParalelo ({ estudiantesId, paralelosId }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: estudiantesId }, { $addToSet: { 'paralelos': paralelosId } }).then((accionEstado) => {
+        resolve(accionEstado.nModified !== 0)
+      })
+    })
+  },
+  EliminarParalelo ({ estudiantesId, paralelosId }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({$and: [{ _id: estudiantesId }, { 'paralelos': { $in: [paralelosId] } }]}, { $pull: { 'paralelos': paralelosId } }).then((accionEstado) => {
+        resolve(accionEstado.nModified !== 0)
+      })
     })
   }
 }
