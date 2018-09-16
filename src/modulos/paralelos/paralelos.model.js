@@ -70,10 +70,74 @@ ParalelosSchema.statics = {
       resolve(self.find({}))
     })
   },
-  Obtener (id) {
+  Obtener ({ id }) {
     const self = this
     return new Promise(function (resolve) {
       resolve(self.findOne({ _id: id }))
+    })
+  },
+  Actualizar ({ id, nombre, anio, termino, materia }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: id }, { $set: { nombre, anio, termino, materia } }).then((accionEstado) => {
+        resolve(!!accionEstado.nModified)
+      })
+    })
+  },
+  Eliminar ({ id }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: id }, { $set: { estado: 'inactivo' } }).then((accionEstado) => {
+        resolve(!!accionEstado.nModified)
+      })
+    })
+  },
+  AnadirEstudiante ({ paralelosId, estudiantesId }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: paralelosId }, { $addToSet: { 'estudiantes': estudiantesId } }).then((accionEstado) => {
+        resolve(accionEstado.nModified !== 0)
+      })
+    })
+  },
+  EliminarEstudiante ({ paralelosId, estudiantesId }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: paralelosId }, { $pull: { 'estudiantes': estudiantesId } }).then((accionEstado) => {
+        resolve(accionEstado.nModified !== 0)
+      })
+    })
+  },
+  AnadirProfesor ({ paralelosId, profesoresId }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: paralelosId }, { $addToSet: { 'profesores': profesoresId } }).then((accionEstado) => {
+        resolve(accionEstado.nModified !== 0)
+      })
+    })
+  },
+  EliminarProfesor ({ paralelosId, profesoresId }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: paralelosId }, { $pull: { 'profesores': profesoresId } }).then((accionEstado) => {
+        resolve(accionEstado.nModified !== 0)
+      })
+    })
+  },
+  AnadirGrupo ({ paralelosId, gruposId }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: paralelosId }, { $addToSet: { 'grupos': gruposId } }).then((accionEstado) => {
+        resolve(accionEstado.nModified !== 0)
+      })
+    })
+  },
+  EliminarGrupo ({ paralelosId, gruposId }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: paralelosId }, { $pull: { 'grupos': gruposId } }).then((accionEstado) => {
+        resolve(accionEstado.nModified !== 0)
+      })
     })
   }
 }

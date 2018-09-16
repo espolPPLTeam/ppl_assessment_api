@@ -1,3 +1,4 @@
 module.exports = {
-  materias: require('./materias')
+  materias: require('./materias'),
+  paralelos: require('./paralelos')
 }

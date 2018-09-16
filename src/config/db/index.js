@@ -31,11 +31,33 @@ let getDatabaseConnection = function () {
   return db
 }
 
+const Calificaciones = require('../../modulos/calificaciones/calificaciones.model.js')
+const Capitulos = require('../../modulos/capitulos/capitulos.model.js')
+const Estudiantes = require('../../modulos/estudiantes/estudiantes.model.js')
+const Grupos = require('../../modulos/grupos/grupos.model.js')
+const Lecciones = require('../../modulos/lecciones/lecciones.model.js')
 const Materias = require('../../modulos/materias/materias.model.js')
+const Paralelos = require('../../modulos/paralelos/paralelos.model.js')
+const Preguntas = require('../../modulos/preguntas/preguntas.model.js')
+const Profesores = require('../../modulos/profesores/profesores.model.js')
+const Respuestas = require('../../modulos/respuestas/respuestas.model.js')
+const Rubricas = require('../../modulos/rubricas/rubricas.model.js')
+const Secciones = require('../../modulos/secciones/secciones.model.js')
 
 let modelos = function () {
   return {
-    Materias
+    Calificaciones,
+    Capitulos,
+    Estudiantes,
+    Grupos,
+    Lecciones,
+    Materias,
+    Paralelos,
+    Preguntas,
+    Profesores,
+    Respuestas,
+    Rubricas,
+    Secciones
   }
 }
 

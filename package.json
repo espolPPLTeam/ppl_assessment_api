@@ -11,6 +11,7 @@
     "test:r": "cross-env NODE_ENV=testing mocha src/modulos/**/*.test.js --require src/config/helper.test.js",
     "test:r:c": "cross-env NODE_ENV=testing nyc mocha src/modulos/**/*.test.js --require src/config/helper.test.js",
     "lint": "eslint src/**",
+    "test": "npm-run-all lint test:r",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
@@ -26,16 +27,17 @@
   "devDependencies": {
     "babel-eslint": "^9.0.0",
     "chai": "^4.1.2",
+    "coveralls": "^3.0.2",
     "cross-env": "^5.2.0",
     "env-cmd": "^8.0.2",
     "eslint": "^5.6.0",
-    "coveralls": "^3.0.2",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-standard": "^4.0.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.4",
+    "npm-run-all": "^4.1.3",
     "nyc": "^13.0.1",
     "sinon": "^6.3.3",
     "standard": "^12.0.1",

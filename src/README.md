@@ -19,3 +19,29 @@
 	router.put('/calificar/leccion/:id_leccion/estudiante/:id_estudiante', authApi.profesor, EstudiantesController.calificarLeccion)
 
 -->
+
+## Modulos
+
+[ ] Calificaciones
+
+[ ] Capitulos
+
+[ ] Estudiantes
+
+[ ] Grupos
+
+[ ] Lecciones
+
+[ ] Materias
+
+[x] Paralelos
+
+[ ] Preguntas
+
+[ ] Profesores
+
+[ ] Respuestas
+
+[ ] Rubricas
+
+[ ] Secciones

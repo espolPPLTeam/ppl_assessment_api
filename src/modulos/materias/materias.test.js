@@ -14,7 +14,7 @@ describe('MATERIAS', () => {
     db.Desconectar()
   })
 
-  it('Crear', async () => {
+  it('@T10 Crear', async () => {
     let res = await request(app).post(`/api/ppl/materias`).send(materia)
     let materiaCreada = await modelos.Materias.Obtener(res.body.datos.id)
     expect(res.body.estado).to.equal(true)
@@ -28,7 +28,7 @@ describe('MATERIAS', () => {
     expect(materiaCreada).to.have.property('codigo', materia.codigo)
   })
 
-  it('Obtener Todos', async () => {
+  it('@T20 Obtener Todos', async () => {
     await materiasController.Crear(materia)
     let res = await request(app).get(`/api/ppl/materias`)
     expect(res.body.estado).to.equal(true)
@@ -39,7 +39,7 @@ describe('MATERIAS', () => {
     expect(err, `${JSON.stringify(errMsg)}`).to.equal(false)
   })
 
-  it('Actualizar')
+  it('@T30 Actualizar')
 
-  it('Eliminar')
+  it('@T40 Eliminar')
 })

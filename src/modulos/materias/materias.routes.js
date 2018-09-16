@@ -5,6 +5,14 @@ const Controller = require('./materias.controller')({ db })
 const responses = require('../../config/responses')
 
 module.exports = (app) => {
+  // CRUD
+  app
+    .route('/materias')
+    .get(async (req, res) => {
+      let resp = await Controller.ObtenerTodos()
+      res.status(resp.codigoEstado).send(resp)
+    })
+
   app.route('/materias')
     .post(async (req, res) => {
       let [error, mensajeError] = validarRequest(schema, req, 'CREAR')
@@ -15,12 +23,5 @@ module.exports = (app) => {
       let { nombre, codigo } = req.body
       let resp = await Controller.Crear({ nombre, codigo })
       return res.status(resp.codigoEstado).send(resp)
-    })
-
-  app
-    .route('/materias')
-    .get(async (req, res) => {
-      let resp = await Controller.ObtenerTodos()
-      res.status(resp.codigoEstado).send(resp)
     })
 }

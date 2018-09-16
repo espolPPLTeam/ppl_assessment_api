@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 
 require('./materias/materias.routes')(app)
+require('./paralelos/paralelos.routes')(app)
 
 app.route('*')
   .get((req, res) => {

@@ -15,7 +15,7 @@ yarn run dev
 # Correr test
 
 ```sh
-yarn cross-env NODE_ENV=testing mocha api/modulos/materias/materias.test.js
+ NODE_ENV=testing yarn mocha src/modulos/materias/materias.test.js --require src/config/helper.test.js
 ```
 
 
