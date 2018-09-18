@@ -48,58 +48,91 @@ module.exports = ({ db }) => {
       return responses.OK('Agregado correctamente')
     },
     async EliminarEstudiante ({ paralelosId, estudiantesId }) {
-      let fueEliminado = await db.Paralelos.EliminarEstudiante({ paralelosId, estudiantesId })      
+      let fueEliminado = await db.Paralelos.EliminarEstudiante({ paralelosId, estudiantesId })
       if (!fueEliminado) {
         return responses.NO_OK(['El paralelo o el estudiante no existe'])
       }
+      await Promise.all([
+        // los estudiantes tienen paralelos a los que estan inscritos
+        db.Estudiantes.EliminarParalelo({ estudiantesId, paralelosId }),
 
-      // los estudiantes tienen paralelos a los que estan inscritos
-      await db.Estudiantes.EliminarParalelo({ estudiantesId, paralelosId })
-
-      // es estudiante puede estar en algun grupo inscrito o no. El retorno puedes ser true o false y esto depende si es
-      // que el estudiante fue inscrito en un grupo antes de ser eliminado
-      await db.Grupos.EliminarEstudiantePorParalelo({ paralelosId, estudiantesId })
+        // es estudiante puede estar en algun grupo inscrito o no. El retorno puedes ser true o false y esto depende si es
+        // que el estudiante fue inscrito en un grupo antes de ser eliminado
+        db.Grupos.EliminarEstudiantePorParalelo({ paralelosId, estudiantesId })
+      ])
 
       return responses.OK('Eliminado el estudiante del paralelo')
     },
     async AnadirProfesor ({ paralelosId, profesoresId }) {
-      let fueAnadido = await db.Paralelos.AnadirProfesor({ paralelosId, profesoresId })
-
-      // los profesor tienen una lista de paralelo a los cuales dan clase
-      let fueAnadidoParaleloAlProfesor = await db.Profesores.AnadirParalelo({ profesoresId, paralelosId })
-      if (!fueAnadido && !fueAnadidoParaleloAlProfesor) {
+      let [paraleloExiste, profesorExiste] = await Promise.all([
+        db.Paralelos.Obtener({ id: paralelosId }),
+        db.Profesores.Obtener({ id: profesoresId })
+      ])
+      if (!paraleloExiste && !profesorExiste) {
         return responses.NO_OK(['El paralelo no existe', 'El profesor no existe'])
-      } else if (!fueAnadido) {
+      } else if (!paraleloExiste) {
         return responses.NO_OK(['El paralelo no existe'])
-      } else if (!fueAnadidoParaleloAlProfesor) {
+      } else if (!profesorExiste) {
         return responses.NO_OK(['El profesor no existe'])
       }
+
+      await Promise.all([
+        db.Paralelos.AnadirProfesor({ paralelosId, profesoresId }),
+
+        // los profesor tienen una lista de paralelo a los cuales dan clase
+        db.Profesores.AnadirParalelo({ profesoresId, paralelosId })
+      ])
       return responses.OK('Anadido profesor correctamente')
     },
     async EliminarProfesor ({ paralelosId, profesoresId }) {
-      // los profesores tienen paralelos db.Profesores.EliminarParalelo ({ profesoresId, paralelosId })
-      // los profesores tienen grupos que pertenecen al paralelo que se elimina
       let fueEliminado = await db.Paralelos.EliminarProfesor({ paralelosId, profesoresId })
-      if (fueEliminado) {
-        return responses.OK('Eliminado el profesor del paralelo')
+      if (!fueEliminado) {
+        return responses.NO_OK(['El paralelo o el profesor no existe'])
       }
-      return responses.NO_OK(['Paralelo no existe'])
+
+      // los profesores tienen paralelos a los que estan inscritos
+      await db.Profesores.EliminarParalelo({ profesoresId, paralelosId })
+
+      let gruposParalelo = await db.Paralelos.Obtener({ id: paralelosId })
+      let grupos = gruposParalelo['grupos']
+      let exitenGrupos = grupos.length
+      if (exitenGrupos) {
+        // eliminar los grupos que el profesor tiene de este paralelo del cual es eliminado
+        await db.Profesores.EliminarGrupos({ profesoresId, gruposIds: grupos })
+      }
+
+      return responses.OK('Eliminado el profesor del paralelo')
     },
     async AnadirGrupo ({ paralelosId, gruposId }) {
-      let fueAnadido = await db.Paralelos.AnadirGrupo({ paralelosId, gruposId })
-      if (fueAnadido) {
-        return responses.OK('Agregado grupo correctamente')
+      let paraleloExiste = await db.Paralelos.Obtener({ id: paralelosId })
+      let grupoExiste = await db.Grupos.Obtener({ id: gruposId })
+
+      if (!paraleloExiste && !grupoExiste) {
+        return responses.NO_OK(['El paralelo no existe', 'El grupo no existe'])
+      } else if (!paraleloExiste) {
+        return responses.NO_OK(['El paralelo no existe'])
+      } else if (!grupoExiste) {
+        return responses.NO_OK(['El grupo no existe'])
       }
-      return responses.NO_OK(['Paralelo no existe'])
+      await db.Paralelos.AnadirGrupo({ paralelosId, gruposId })
+      return responses.OK('Anadido grupo correctamente')
     },
     async EliminarGrupo ({ paralelosId, gruposId }) {
-      // los estudiantes tienen grupos 
-      // db.Grupos.Eliminar ({ id })
       let fueEliminado = await db.Paralelos.EliminarGrupo({ paralelosId, gruposId })
-      if (fueEliminado) {
-        return responses.OK('Eliminado el grupo del paralelo')
+      if (!fueEliminado) {
+        return responses.NO_OK(['El paralelo o el grupo no existe'])
       }
-      return responses.NO_OK(['Paralelo no existe'])
+      await Promise.all([
+        // eliminar de profesores que tienen a este grupo
+        db.Profesores.EliminarGruposDeTodos({ gruposId }),
+
+        // eliminar de todos los estudiantes que tienen a este grupo
+        db.Estudiantes.EliminarGruposDeTodos({ gruposId }),
+
+        // no tiene sentido que existe un grupo sin paralelo no?
+        db.Grupos.Eliminar({ id: gruposId })
+      ])
+      return responses.OK('Eliminado el grupo del paralelo')
     }
   }
   return Object.assign(Object.create(proto), {})

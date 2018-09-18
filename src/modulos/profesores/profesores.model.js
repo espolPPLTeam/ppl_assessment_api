@@ -87,6 +87,30 @@ ProfesoresModel.statics = {
         resolve(accionEstado.nModified !== 0)
       })
     })
+  },
+  AnadirGrupo ({ profesoresId, gruposId }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: profesoresId }, { $addToSet: { 'grupos': gruposId } }).then((accionEstado) => {
+        resolve(accionEstado.nModified !== 0)
+      })
+    })
+  },
+  EliminarGrupos ({ profesoresId, gruposIds }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: profesoresId }, { $pull: { 'grupos': { $in: gruposIds } } }).then((accionEstado) => {
+        resolve(accionEstado.nModified !== 0)
+      })
+    })
+  },
+  EliminarGruposDeTodos ({ gruposId }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateMany({ }, { $pull: { 'grupos': gruposId } }).then((accionEstado) => {
+        resolve(accionEstado.nModified !== 0)
+      })
+    })
   }
 }
 

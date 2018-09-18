@@ -103,7 +103,7 @@ ParalelosSchema.statics = {
   EliminarEstudiante ({ paralelosId, estudiantesId }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({$and: [{ _id: paralelosId }, { 'estudiantes': { $in : [estudiantesId] } }]}, { $pull: { 'estudiantes': estudiantesId } }).then((accionEstado) => {
+      self.updateOne({ $and: [{ _id: paralelosId }, { 'estudiantes': { $in: [estudiantesId] } }] }, { $pull: { 'estudiantes': estudiantesId } }).then((accionEstado) => {
         resolve(accionEstado.nModified !== 0)
       })
     })
@@ -119,7 +119,7 @@ ParalelosSchema.statics = {
   EliminarProfesor ({ paralelosId, profesoresId }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({ _id: paralelosId }, { $pull: { 'profesores': profesoresId } }).then((accionEstado) => {
+      self.updateOne({ $and: [{ _id: paralelosId }, { 'profesores': { $in: [profesoresId] } }] }, { $pull: { 'profesores': profesoresId } }).then((accionEstado) => {
         resolve(accionEstado.nModified !== 0)
       })
     })
@@ -135,7 +135,7 @@ ParalelosSchema.statics = {
   EliminarGrupo ({ paralelosId, gruposId }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({ _id: paralelosId }, { $pull: { 'grupos': gruposId } }).then((accionEstado) => {
+      self.updateOne({ $and: [{ _id: paralelosId }, { 'grupos': { $in: [gruposId] } }] }, { $pull: { 'grupos': gruposId } }).then((accionEstado) => {
         resolve(accionEstado.nModified !== 0)
       })
     })

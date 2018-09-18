@@ -242,12 +242,22 @@ describe('PARALELOS', () => {
     })
   })
 
-  describe('PROFESOR', () => {
+  context('PROFESOR', () => {
     let id = ''
+    let gruposId = ''
+    let gruposId2 = ''
     beforeEach(async () => {
       let paraleloModelo = new modelos.Paralelos(paralelo)
       let paraleloCreada = await paraleloModelo.Crear()
       id = paraleloCreada['_id']
+
+      let GrupoModelo = new modelos.Grupos({ ...grupo, paralelo: id })
+      let GrupoCreado = await GrupoModelo.Crear()
+      gruposId = GrupoCreado['_id']
+
+      let GrupoModelo2 = new modelos.Grupos({ ...grupo, paralelo: id })
+      let GrupoCreado2 = await GrupoModelo2.Crear()
+      gruposId2 = GrupoCreado2['_id']
     })
 
     describe('Anadir Profesor', () => {
@@ -294,50 +304,143 @@ describe('PARALELOS', () => {
       })
     })
     
+    describe('Eliminar Profesor', () => {
+      it('@T90 Caso existoso', async () => {
 
-    it('@T90 Eliminar Profesor', async () => {
-      let fueAnadido = await modelos.Paralelos.AnadirProfesor({ paralelosId: id, profesoresId })
-      expect(fueAnadido).to.equal(true)
-      let res = await request(app).delete(`/api/ppl/paralelos/${id}/profesores/${profesoresId}`)
-      expect(res.body.estado).to.equal(true)
-      expect(res.body.codigoEstado).to.equal(200)
+        // anadir grupo al paralelo
+        await modelos.Paralelos.AnadirGrupo({ paralelosId: id, gruposId })
 
-      let paraleloEncontrada = await modelos.Paralelos.Obtener({ id })
-      expect(paraleloEncontrada).to.not.equal(null)
-      expect(paraleloEncontrada['profesores'].length).to.equal(0)
+        // anadir el profesor al paralelo
+        await modelos.Paralelos.AnadirProfesor({ paralelosId: id, profesoresId })
+
+        // anadir el grupo al profesor
+        await modelos.Profesores.AnadirGrupo({ profesoresId, gruposId })
+        await modelos.Profesores.AnadirGrupo({ profesoresId, gruposId: gruposId2 })
+
+        let profesor = await modelos.Profesores.Obtener({ id: profesoresId })
+        expect(profesor.grupos.length).to.equal(2)
+
+        let res = await request(app).delete(`/api/ppl/paralelos/${id}/profesores/${profesoresId}`)
+
+        profesor = await modelos.Profesores.Obtener({ id: profesoresId })
+        expect(profesor.grupos.length).to.equal(1)
+        // expect(res.body.estado).to.equal(true)
+        // expect(res.body.codigoEstado).to.equal(200)
+
+        // let paraleloEncontrada = await modelos.Paralelos.Obtener({ id })
+        // expect(paraleloEncontrada).to.not.equal(null)
+        // expect(paraleloEncontrada['profesores'].length).to.equal(0)
+      })
     })
   })
 
-  describe('PROFESOR', () => {
+  context('GRUPOS', () => {
     let id = ''
     let gruposId = ''
     beforeEach(async () => {
       let paraleloModelo = new modelos.Paralelos(paralelo)
       let paraleloCreada = await paraleloModelo.Crear()
       id = paraleloCreada['_id']
-      gruposId = 'aaaaaa'
-    })
-    it('@T110 Anadir Grupo', async () => {
-      let res = await request(app).put(`/api/ppl/paralelos/${id}/grupos/${gruposId}`)
-      expect(res.body.estado).to.equal(true)
-      expect(res.body.codigoEstado).to.equal(200)
 
-      let paraleloEncontrada = await modelos.Paralelos.Obtener({ id })
-      expect(paraleloEncontrada).to.not.equal(null)
-      expect(paraleloEncontrada['grupos'].length).to.equal(1)
-      expect(paraleloEncontrada['grupos'][0]).to.equal(gruposId)
+      let GrupoModelo = new modelos.Grupos({ ...grupo, paralelo: id })
+      let GrupoCreado = await GrupoModelo.Crear()
+      gruposId = GrupoCreado['_id']
     })
 
-    it('@T120 Eliminar Grupo', async () => {
-      let fueAnadido = await modelos.Paralelos.AnadirProfesor({ paralelosId: id, gruposId })
-      expect(fueAnadido).to.equal(true)
-      let res = await request(app).delete(`/api/ppl/paralelos/${id}/grupos/${gruposId}`)
-      expect(res.body.estado).to.equal(true)
-      expect(res.body.codigoEstado).to.equal(200)
+    describe('Anadir Grupo', () => {
+      it('@T110 Caso exitoso', async () => {
+        // anadir grupo al paralelo
+        await modelos.Paralelos.AnadirGrupo({ paralelosId: id, gruposId })
 
-      let paraleloEncontrada = await modelos.Paralelos.Obtener({ id })
-      expect(paraleloEncontrada).to.not.equal(null)
-      expect(paraleloEncontrada['grupos'].length).to.equal(0)
+        let res = await request(app).put(`/api/ppl/paralelos/${id}/grupos/${gruposId}`)
+        expect(res.body.estado).to.equal(true)
+        expect(res.body.codigoEstado).to.equal(200)
+        expect(res.body.datos).to.equal('Anadido grupo correctamente')
+        
+        let paraleloEncontrada = await modelos.Paralelos.Obtener({ id })
+        expect(paraleloEncontrada).to.not.equal(null)
+        expect(paraleloEncontrada['grupos'].length).to.equal(1)
+        expect(paraleloEncontrada['grupos'][0]).to.equal(gruposId)
+      })
+
+      it('@T111 Paralelo no existe', async () => {
+        let res = await request(app).put(`/api/ppl/paralelos/aaaa/grupos/${gruposId}`)
+        expect(res.body.estado).to.equal(false)
+        expect(res.body.codigoEstado).to.equal(200)
+        expect(res.body.datos.length).to.equal(1)
+        expect(res.body.datos[0]).to.equal('El paralelo no existe')
+        expect(res.body.datos.length).to.equal(1)
+
+      })
+
+      it('@T112 Grupo no existe', async () => {
+        let res = await request(app).put(`/api/ppl/paralelos/${id}/grupos/aaaaaa`)
+        expect(res.body.estado).to.equal(false)
+        expect(res.body.codigoEstado).to.equal(200)
+        expect(res.body.datos[0]).to.equal('El grupo no existe')
+        expect(res.body.datos.length).to.equal(1)
+      })
+
+      it('@T113 Paralelo y Grupo no existen', async () => {
+        let res = await request(app).put(`/api/ppl/paralelos/aaaaa/grupos/aaaaa`)
+        expect(res.body.estado).to.equal(false)
+        expect(res.body.codigoEstado).to.equal(200)
+        expect(res.body.datos.length).to.equal(2)
+        expect(res.body.datos[0]).to.equal('El paralelo no existe')
+        expect(res.body.datos[1]).to.equal('El grupo no existe')
+      })
+    })
+
+    describe('Eliminar Grupo', () => {
+      it('@T120 Caso existoso', async () => {
+        // anadir el grupo a un profesor
+        await modelos.Profesores.AnadirGrupo({ profesoresId, gruposId })
+
+        // anadir el profesor al paralelo
+        await modelos.Paralelos.AnadirProfesor({ paralelosId: id, gruposId })
+
+        // anadir el grupo al paralelo
+        await modelos.Paralelos.AnadirGrupo({ paralelosId: id, gruposId })
+
+        let profesor = await modelos.Profesores.Obtener({ id: profesoresId })
+        let paralelo = await modelos.Paralelos.Obtener({ id })
+        let grupo = await modelos.Grupos.Obtener({ id: gruposId })
+
+        expect(profesor.grupos.length).to.equal(1)
+        expect(paralelo.profesores.length).to.equal(1)
+        expect(grupo).to.not.equal(null)
+
+        let res = await request(app).delete(`/api/ppl/paralelos/${id}/grupos/${gruposId}`)
+        expect(res.body.estado).to.equal(true)
+        expect(res.body.codigoEstado).to.equal(200)
+        expect(res.body.datos).to.equal('Eliminado el grupo del paralelo')
+
+        let paraleloEncontrada = await modelos.Paralelos.Obtener({ id })
+        expect(paraleloEncontrada).to.not.equal(null)
+        expect(paraleloEncontrada['grupos'].length).to.equal(0)
+
+        grupo = await modelos.Grupos.Obtener({ id: gruposId })
+        expect(grupo).to.equal(null)
+
+        profesor = await modelos.Profesores.Obtener({ id: profesoresId })
+        expect(profesor.grupos.length).to.equal(0)
+      })
+
+      it('@T121 El paralelo no exite', async () => {
+        let res = await request(app).delete(`/api/ppl/paralelos/aaaaa/grupos/${gruposId}`)
+        expect(res.body.estado).to.equal(false)
+        expect(res.body.codigoEstado).to.equal(200)
+        expect(res.body.datos[0]).to.equal('El paralelo o el grupo no existe')
+        expect(res.body.datos.length).to.equal(1)
+      })
+
+      it('@T122 El grupo no exite', async () => {
+        let res = await request(app).delete(`/api/ppl/paralelos/${id}/grupos/aaaa`)
+        expect(res.body.estado).to.equal(false)
+        expect(res.body.codigoEstado).to.equal(200)
+        expect(res.body.datos[0]).to.equal('El paralelo o el grupo no existe')
+        expect(res.body.datos.length).to.equal(1)
+      })
     })
   })
 })

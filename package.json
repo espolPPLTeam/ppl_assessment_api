@@ -11,7 +11,7 @@
     "test:r": "cross-env NODE_ENV=testing mocha src/modulos/**/*.test.js --require src/config/helper.test.js",
     "test:r:c": "cross-env NODE_ENV=testing nyc mocha src/modulos/**/*.test.js --require src/config/helper.test.js",
     "lint": "eslint src/**",
-    "test": "npm-run-all lint test:r",
+    "test": "npm-run-all lint test:r:c",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {

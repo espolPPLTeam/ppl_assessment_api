@@ -58,7 +58,7 @@ GruposSchema.statics = {
   Eliminar ({ id }) {
     const self = this
     return new Promise(function (resolve) {
-      self.findOneAndRemove({ _id: id }).then((accionEstado) => {
+      self.findOneAndDelete({ _id: id }).then((accionEstado) => {
         resolve(accionEstado.nModified !== 0)
       })
     })
@@ -66,7 +66,7 @@ GruposSchema.statics = {
   EliminarEstudiantePorParalelo ({ paralelosId, estudiantesId }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({$and: [{ paralelo: paralelosId }, { 'estudiantes': { $in : [estudiantesId] } }]}, { $pull: { 'estudiantes': estudiantesId } }).then((accionEstado) => {
+      self.updateOne({ $and: [{ paralelo: paralelosId }, { 'estudiantes': { $in: [estudiantesId] } }] }, { $pull: { 'estudiantes': estudiantesId } }).then((accionEstado) => {
         resolve(accionEstado.nModified !== 0)
       })
     })
