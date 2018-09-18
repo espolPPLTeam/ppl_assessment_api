@@ -3,6 +3,7 @@ const app = express()
 
 require('./materias/materias.routes')(app)
 require('./paralelos/paralelos.routes')(app)
+require('./estudiantes/estudiantes.routes')(app)
 
 app.route('*')
   .get((req, res) => {

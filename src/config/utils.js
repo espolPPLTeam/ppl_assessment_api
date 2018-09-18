@@ -10,8 +10,17 @@ function validar (schema, datos) {
   if (errores) {
     erroresReturn = {}
     for (let error of errores) {
-      let nombre = error['dataPath'].split('/')[1]
-      erroresReturn[nombre] = error['message']
+      // console.log(error)
+      if (error['keyword'] === 'additionalProperties') {
+        let nombre = error['params']['additionalProperty']
+        erroresReturn[nombre] = `${error['message']}`
+      } else if (error['keyword'] === 'minProperties' || error['keyword'] === 'maxProperties') {
+        let nombre = ''
+        erroresReturn[nombre] = `${error['message']}`
+      } else {
+        let nombre = error['dataPath'].split('/')[1]
+        erroresReturn[nombre] = error['message']
+      }
     }
     return [true, erroresReturn]
   }
@@ -42,7 +51,7 @@ module.exports = {
 
     let errores = []
     for (let error in mensajeBody) {
-      if (!error) {
+      if (!error || error === 'undefined') {
         errores.push(`El body ${mensajeBody[error]} `)
       } else {
         errores.push(`El campo del body ${error}: ${mensajeBody[error]}`)

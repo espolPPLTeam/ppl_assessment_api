@@ -12,6 +12,11 @@
 
 ## Otros
 
+* Access control
+https://blog.nodeswat.com/implement-access-control-in-node-js-8567e7b484d1
+https://github.com/onury/accesscontrol
+https://github.com/seeden/rbac
+
 * Al hacer la integracion de los modulos
 https://github.com/lerna/lerna
 

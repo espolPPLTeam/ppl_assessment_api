@@ -22,26 +22,31 @@
 
 ## Modulos
 
-[ ] Calificaciones
-
-[ ] Capitulos
-
-[ ] Estudiantes /
-
-[ ] Grupos
-
-[ ] Lecciones
-
-[ ] Materias
+[x] Materias
 
 [x] Paralelos
 
+// Martes
+[ ] Estudiantes
+
+[ ] Profesores
+
+[ ] Grupos
+
+// Miercoles
+[ ] Capitulos
+
+[ ] Secciones
+
+// Jueves
 [ ] Preguntas
 
-[ ] Profesores /
+// Viernes
+[ ] Lecciones
 
 [ ] Respuestas
 
-[ ] Rubricas
+// Sabado
+[ ] Calificaciones
 
-[ ] Secciones
+[ ] Rubricas

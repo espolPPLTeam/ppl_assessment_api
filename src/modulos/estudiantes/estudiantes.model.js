@@ -18,7 +18,8 @@ const EstudiantesSchema = mongoose.Schema({
     required: true
   },
   carrera: {
-    type: String
+    type: String,
+    'default': ''
   },
   matricula: {
     type: String
@@ -76,17 +77,45 @@ EstudiantesSchema.statics = {
       resolve(self.find({}))
     })
   },
+  ObtenerTodosFiltrado () {
+    const self = this
+    return new Promise(function (resolve) {
+      resolve(self.find({}, { lecciones: 0, paralelos: 0, grupos: 0, clave: 0 }))
+    })
+  },
   Obtener ({ id }) {
     const self = this
     return new Promise(function (resolve) {
       resolve(self.findOne({ _id: id }))
     })
   },
+  ObtenerFiltrado ({ id }) {
+    const self = this
+    return new Promise(function (resolve) {
+      resolve(self.findOne({ _id: id }, { lecciones: 0, paralelos: 0, grupos: 0, clave: 0 }))
+    })
+  },
+  Actualizar ({ id, nombres, apellidos, carrera, matricula, correo }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: id }, { $set: { nombres, apellidos, carrera, matricula, correo } }).then((accionEstado) => {
+        resolve(!!accionEstado.nModified)
+      })
+    })
+  },
+  Eliminar ({ id }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: id }, { $set: { estado: 'inactivo' } }).then((accionEstado) => {
+        resolve(!!accionEstado.nModified)
+      })
+    })
+  },
   AnadirParalelo ({ estudiantesId, paralelosId }) {
     const self = this
     return new Promise(function (resolve) {
       self.updateOne({ _id: estudiantesId }, { $addToSet: { 'paralelos': paralelosId } }).then((accionEstado) => {
-        resolve(accionEstado.nModified !== 0)
+        resolve(!!accionEstado.nModified)
       })
     })
   },
@@ -94,7 +123,7 @@ EstudiantesSchema.statics = {
     const self = this
     return new Promise(function (resolve) {
       self.updateOne({ $and: [{ _id: estudiantesId }, { 'paralelos': { $in: [paralelosId] } }] }, { $pull: { 'paralelos': paralelosId } }).then((accionEstado) => {
-        resolve(accionEstado.nModified !== 0)
+        resolve(!!accionEstado.nModified)
       })
     })
   },
@@ -102,7 +131,7 @@ EstudiantesSchema.statics = {
     const self = this
     return new Promise(function (resolve) {
       self.updateMany({ }, { $pull: { 'grupos': gruposId } }).then((accionEstado) => {
-        resolve(accionEstado.nModified !== 0)
+        resolve(!!accionEstado.nModified)
       })
     })
   }

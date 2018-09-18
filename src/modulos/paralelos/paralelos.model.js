@@ -96,7 +96,7 @@ ParalelosSchema.statics = {
     const self = this
     return new Promise(function (resolve) {
       self.updateOne({ _id: paralelosId }, { $addToSet: { 'estudiantes': estudiantesId } }).then((accionEstado) => {
-        resolve(accionEstado.nModified !== 0)
+        resolve(!!accionEstado.nModified)
       })
     })
   },
@@ -104,7 +104,7 @@ ParalelosSchema.statics = {
     const self = this
     return new Promise(function (resolve) {
       self.updateOne({ $and: [{ _id: paralelosId }, { 'estudiantes': { $in: [estudiantesId] } }] }, { $pull: { 'estudiantes': estudiantesId } }).then((accionEstado) => {
-        resolve(accionEstado.nModified !== 0)
+        resolve(!!accionEstado.nModified)
       })
     })
   },
@@ -112,7 +112,7 @@ ParalelosSchema.statics = {
     const self = this
     return new Promise(function (resolve) {
       self.updateOne({ _id: paralelosId }, { $addToSet: { 'profesores': profesoresId } }).then((accionEstado) => {
-        resolve(accionEstado.nModified !== 0)
+        resolve(!!accionEstado.nModified)
       })
     })
   },
@@ -120,7 +120,7 @@ ParalelosSchema.statics = {
     const self = this
     return new Promise(function (resolve) {
       self.updateOne({ $and: [{ _id: paralelosId }, { 'profesores': { $in: [profesoresId] } }] }, { $pull: { 'profesores': profesoresId } }).then((accionEstado) => {
-        resolve(accionEstado.nModified !== 0)
+        resolve(!!accionEstado.nModified)
       })
     })
   },
@@ -128,7 +128,7 @@ ParalelosSchema.statics = {
     const self = this
     return new Promise(function (resolve) {
       self.updateOne({ _id: paralelosId }, { $addToSet: { 'grupos': gruposId } }).then((accionEstado) => {
-        resolve(accionEstado.nModified !== 0)
+        resolve(!!accionEstado.nModified)
       })
     })
   },
@@ -136,7 +136,7 @@ ParalelosSchema.statics = {
     const self = this
     return new Promise(function (resolve) {
       self.updateOne({ $and: [{ _id: paralelosId }, { 'grupos': { $in: [gruposId] } }] }, { $pull: { 'grupos': gruposId } }).then((accionEstado) => {
-        resolve(accionEstado.nModified !== 0)
+        resolve(!!accionEstado.nModified)
       })
     })
   }
