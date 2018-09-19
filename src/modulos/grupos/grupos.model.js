@@ -55,11 +55,19 @@ GruposSchema.statics = {
       resolve(self.findOne({ _id: id }))
     })
   },
+  Actualizar ({ id, nombre }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: id }, { $set: { nombre } }).then((accionEstado) => {
+        resolve(!!accionEstado.nModified)
+      })
+    })
+  },
   Eliminar ({ id }) {
     const self = this
     return new Promise(function (resolve) {
       self.findOneAndDelete({ _id: id }).then((accionEstado) => {
-        resolve(accionEstado.nModified !== 0)
+        resolve(!!accionEstado)
       })
     })
   },
@@ -67,7 +75,7 @@ GruposSchema.statics = {
     const self = this
     return new Promise(function (resolve) {
       self.updateOne({ $and: [{ paralelo: paralelosId }, { 'estudiantes': { $in: [estudiantesId] } }] }, { $pull: { 'estudiantes': estudiantesId } }).then((accionEstado) => {
-        resolve(accionEstado.nModified !== 0)
+        resolve(!!accionEstado.nModified)
       })
     })
   },
@@ -75,7 +83,15 @@ GruposSchema.statics = {
     const self = this
     return new Promise(function (resolve) {
       self.updateOne({ _id: gruposId }, { $addToSet: { 'estudiantes': estudiantesId } }).then((accionEstado) => {
-        resolve(accionEstado.nModified !== 0)
+        resolve(!!accionEstado.nModified)
+      })
+    })
+  },
+  EliminarEstudiante ({ gruposId, estudiantesId }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ $and: [{ _id: gruposId }, { 'estudiantes': { $in: [estudiantesId] } }] }, { $pull: { 'estudiantes': estudiantesId } }).then((accionEstado) => {
+        resolve(!!accionEstado.nModified)
       })
     })
   }

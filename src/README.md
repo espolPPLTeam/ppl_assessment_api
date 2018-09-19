@@ -29,9 +29,9 @@
 // Martes
 [x] Estudiantes
 
-[ ] Profesores
+[x] Profesores
 
-[ ] Grupos
+[x] Grupos
 
 // Miercoles
 [ ] Capitulos

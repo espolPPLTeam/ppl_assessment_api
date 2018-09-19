@@ -134,6 +134,22 @@ EstudiantesSchema.statics = {
         resolve(!!accionEstado.nModified)
       })
     })
+  },
+  AnadirGrupo ({ estudiantesId, gruposId }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: estudiantesId }, { $addToSet: { 'grupos': gruposId } }).then((accionEstado) => {
+        resolve(!!accionEstado.nModified)
+      })
+    })
+  },
+  EliminarGrupo ({ gruposId, estudiantesId }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: estudiantesId }, { $pull: { 'grupos': gruposId } }).then((accionEstado) => {
+        resolve(!!accionEstado.nModified)
+      })
+    })
   }
 }
 

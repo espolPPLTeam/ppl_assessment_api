@@ -88,7 +88,7 @@ describe('ESTUDIANTES', () => {
       expect(estudianteEncontrado).to.not.equal(null)
       expect(estudianteEncontrado).to.have.property('estado', 'inactivo')
     })
-    it('@T41 Paralelo no existe', async () => {
+    it('@T41 Estudiante no existe', async () => {
       let res = await request(app).delete(`/api/ppl/estudiantes/aaaaaa`)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
