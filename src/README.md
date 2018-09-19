@@ -27,7 +27,7 @@
 [x] Paralelos
 
 // Martes
-[ ] Estudiantes
+[x] Estudiantes
 
 [ ] Profesores
 

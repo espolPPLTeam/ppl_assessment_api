@@ -72,6 +72,34 @@ ProfesoresModel.statics = {
       resolve(self.findOne({ _id: id }))
     })
   },
+  ObtenerTodosFiltrado () {
+    const self = this
+    return new Promise(function (resolve) {
+      resolve(self.find({}, { paralelos: 0, grupos: 0, clave: 0 }))
+    })
+  },
+  ObtenerFiltrado ({ id }) {
+    const self = this
+    return new Promise(function (resolve) {
+      resolve(self.findOne({ _id: id }, { paralelos: 0, grupos: 0, clave: 0 }))
+    })
+  },
+  Actualizar ({ id, nombres, apellidos, correo }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: id }, { $set: { id, nombres, apellidos, correo } }).then((accionEstado) => {
+        resolve(!!accionEstado.nModified)
+      })
+    })
+  },
+  Eliminar ({ id }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: id }, { $set: { estado: 'inactivo' } }).then((accionEstado) => {
+        resolve(!!accionEstado.nModified)
+      })
+    })
+  },
   AnadirParalelo ({ profesoresId, paralelosId }) {
     const self = this
     return new Promise(function (resolve) {
