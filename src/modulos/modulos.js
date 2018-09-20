@@ -6,6 +6,7 @@ require('./paralelos/paralelos.routes')(app)
 require('./estudiantes/estudiantes.routes')(app)
 require('./profesores/profesores.routes')(app)
 require('./grupos/grupos.routes')(app)
+require('./capitulos/capitulos.routes')(app)
 
 app.route('*')
   .get((req, res) => {

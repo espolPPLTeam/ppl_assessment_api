@@ -34,7 +34,7 @@
 [x] Grupos
 
 // Miercoles
-[ ] Capitulos
+[x] Capitulos
 
 [ ] Secciones
 

@@ -3,5 +3,7 @@ module.exports = {
   paralelos: require('./paralelos'),
   estudiantes: require('./estudiantes'),
   grupos: require('./grupos'),
-  profesores: require('./profesores')
+  profesores: require('./profesores'),
+  secciones: require('./secciones'),
+  capitulos: require('./capitulos')
 }

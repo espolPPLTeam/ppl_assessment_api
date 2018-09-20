@@ -25,6 +25,10 @@ module.exports = ({ db }) => {
       }
       return responses.NO_OK(['El grupo no existe'])
     },
+    /*
+      FIX:  Documentos comprometidos:
+      // profesores, estudiantes, paralelos, calificaciones, respuestas, rubricas
+    */
     async Eliminar ({ id }) {
       let fueEliminado = await db.Grupos.Eliminar({ id })
       if (fueEliminado) {

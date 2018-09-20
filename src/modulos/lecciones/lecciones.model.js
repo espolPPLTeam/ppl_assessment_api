@@ -83,6 +83,8 @@ LeccionesSchema.statics = {
       resolve(self.findOne({ _id: id }))
     })
   }
+
+  // this.deleteMany({_id: id_paralelo}, callback);
 }
 
 module.exports = db.model('Lecciones', LeccionesSchema)
