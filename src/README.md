@@ -40,17 +40,17 @@
 
 [ ] Preguntas
 
-// Jueves
+// Viernes
 [ ] Lecciones
 
 [ ] Respuestas
 
-// Viernes
+// Sabado
 [ ] Calificaciones
 
 [ ] Rubricas
 
-// Sabado
+// Domingo
 [ ] documentacion de api
 [ ] logger de errores y try, catch
 [ ] travis y coveralls

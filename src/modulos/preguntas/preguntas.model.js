@@ -66,6 +66,22 @@ PreguntasModel.statics = {
     return new Promise(function (resolve) {
       resolve(self.findOne({ _id: id }))
     })
+  },
+  Actualizar ({ id, nombre, tiempoEstimado, creador, tipoPregunta, puntaje, descripcion }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: id }, { $set: { nombre, tiempoEstimado, creador, tipoPregunta, puntaje, descripcion } }).then((accionEstado) => {
+        resolve(!!accionEstado.nModified)
+      })
+    })
+  },
+  Eliminar ({ id }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.findOneAndDelete({ _id: id }).then((accionEstado) => {
+        resolve(!!accionEstado)
+      })
+    })
   }
 }
 
