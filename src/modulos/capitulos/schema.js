@@ -1,4 +1,4 @@
-let seccion = {
+let capitulo = {
   type: 'object',
   minProperties: 6,
   additionalProperties: false,
@@ -12,7 +12,7 @@ let seccion = {
   }
 }
 
-let seccionActualizar = {
+let capituloActualizar = {
   type: 'object',
   minProperties: 1,
   additionalProperties: false,
@@ -24,19 +24,19 @@ let seccionActualizar = {
 
 module.exports = {
   CREAR: {
-    body: seccionActualizar,
-    res: seccion
+    body: capituloActualizar,
+    res: capitulo
   },
   OBTENER_TODOS: {
     res: {
       type: 'array',
-      items: seccion
+      items: capitulo
     }
   },
   OBTENER: {
-    res: seccion
+    res: capitulo
   },
   ACTUALIZAR: {
-    body: seccionActualizar
+    body: capituloActualizar
   }
 }

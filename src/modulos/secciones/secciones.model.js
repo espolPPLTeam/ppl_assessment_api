@@ -16,7 +16,7 @@ const SeccionesModel = mongoose.Schema({
   descripcion: {
     type: String
   },
-  creador: { // <= deberia ir quemado?
+  creador: {
     type: String,
     ref: 'Profesores'
   },
@@ -64,6 +64,38 @@ SeccionesModel.statics = {
     const self = this
     return new Promise(function (resolve) {
       resolve(self.findOne({ _id: id }))
+    })
+  },
+  Actualizar ({ id, nombre, descripcion, creador, capitulo, tipo }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: id }, { $set: { nombre, descripcion, creador, capitulo, tipo } }).then((accionEstado) => {
+        resolve(!!accionEstado.nModified)
+      })
+    })
+  },
+  Eliminar ({ id }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.findOneAndDelete({ _id: id }).then((accionEstado) => {
+        resolve(!!accionEstado)
+      })
+    })
+  },
+  AnadirPregunta ({ seccionesId, preguntasId }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: seccionesId }, { $addToSet: { 'preguntas': preguntasId } }).then((accionEstado) => {
+        resolve(!!accionEstado.nModified)
+      })
+    })
+  },
+  EliminarPregunta ({ seccionesId, preguntasId }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ $and: [{ _id: seccionesId }, { 'preguntas': { $in: [preguntasId] } }] }, { $pull: { 'preguntas': preguntasId } }).then((accionEstado) => {
+        resolve(!!accionEstado.nModified)
+      })
     })
   }
 }

@@ -36,17 +36,24 @@
 // Miercoles
 [x] Capitulos
 
-[ ] Secciones
+[x] Secciones
 
-// Jueves
 [ ] Preguntas
 
-// Viernes
+// Jueves
 [ ] Lecciones
 
 [ ] Respuestas
 
-// Sabado
+// Viernes
 [ ] Calificaciones
 
 [ ] Rubricas
+
+// Sabado
+[ ] documentacion de api
+[ ] logger de errores y try, catch
+[ ] travis y coveralls
+[ ] analizar gets especiales
+[ ] permisos
+[ ] dockerfile

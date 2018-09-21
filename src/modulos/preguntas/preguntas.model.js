@@ -61,7 +61,7 @@ PreguntasModel.statics = {
       resolve(self.find({}))
     })
   },
-  Obtener (id) {
+  Obtener ({ id }) {
     const self = this
     return new Promise(function (resolve) {
       resolve(self.findOne({ _id: id }))

@@ -121,12 +121,12 @@ describe('CAPITULOS', () => {
       expect(capitulo).to.equal(null)
     })
     it('@T51 Capitulo no existe', async () => {
-      let res = await request(app).delete(`/api/ppl/grupos/aaaaaa`)
+      let res = await request(app).delete(`/api/ppl/capitulos/aaaaaa`)
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
 
       expect(res.body.datos.length).to.equal(1)
-      expect(res.body.datos[0]).to.equal('El grupo no existe')
+      expect(res.body.datos[0]).to.equal('El capitulo no existe')
     })
   })
 
