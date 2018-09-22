@@ -2,6 +2,7 @@ module.exports = [
   {
     nombre: 'Leccion  1',
     capitulo: 'capitulo',
+    secciones: ['seccion 1.1', 'seccion 1.2', 'seccion 1.3'],
     creador: 'creador',
     tiempoEstimadoEnMinutos: 10,
     puntaje: 10,
@@ -13,6 +14,7 @@ module.exports = [
   {
     nombre: 'Leccion 2',
     capitulo: 'capitulo2',
+    secciones: ['seccion 2.1', 'seccion 2.2', 'seccion 2.3', 'seccion 2.4'],
     creador: 'creador2',
     tiempoEstimadoEnMinutos: 15,
     puntaje: 15,

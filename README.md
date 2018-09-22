@@ -26,4 +26,6 @@ yarn run dev
 
 ## Links
 
+* Testing chai arrays
 
+https://medium.com/building-ibotta/testing-arrays-and-objects-with-chai-js-4b372310fe6d

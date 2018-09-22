@@ -77,14 +77,47 @@ LeccionesSchema.statics = {
       resolve(self.find({}))
     })
   },
-  Obtener (id) {
+  Obtener ({ id }) {
     const self = this
     return new Promise(function (resolve) {
       resolve(self.findOne({ _id: id }))
     })
+  },
+  Actualizar ({ id, nombre, capitulo, creador, tiempoEstimadoEnMinutos, puntaje, tipo, paralelo, fechaInicio }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: id }, { $set: { nombre, capitulo, creador, tiempoEstimadoEnMinutos, puntaje, tipo, paralelo, fechaInicio } }).then((accionEstado) => {
+        resolve(!!accionEstado.nModified)
+      })
+    })
+  },
+  Eliminar ({ id }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.findOneAndDelete({ _id: id }).then((accionEstado) => {
+        resolve(!!accionEstado)
+      })
+    })
+  },
+  AnadirSecciones ({ leccionesId, seccionesIds }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: leccionesId }, { $addToSet: { 'secciones': seccionesIds } }).then((accionEstado) => {
+        resolve(!!accionEstado.nModified)
+      })
+    })
+  },
+  EliminarSecciones ({ leccionesId, seccionesIds }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ $and: [{ _id: leccionesId }] }, { $pull: { 'secciones': { $in: seccionesIds } } }).then((accionEstado) => {
+        resolve(!!accionEstado.nModified)
+      })
+    })
   }
+  // Terminar ({ }) {
 
-  // this.deleteMany({_id: id_paralelo}, callback);
+  // }
 }
 
 module.exports = db.model('Lecciones', LeccionesSchema)

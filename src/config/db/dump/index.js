@@ -6,5 +6,6 @@ module.exports = {
   profesores: require('./profesores'),
   secciones: require('./secciones'),
   capitulos: require('./capitulos'),
-  preguntas: require('./preguntas')
+  preguntas: require('./preguntas'),
+  lecciones: require('./lecciones')
 }

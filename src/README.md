@@ -38,19 +38,21 @@
 
 [x] Secciones
 
-[ ] Preguntas
+[x] Preguntas
 
 // Viernes
 [ ] Lecciones
 
+// Sabado
 [ ] Respuestas
 
-// Sabado
 [ ] Calificaciones
 
 [ ] Rubricas
 
 // Domingo
+[ ] cambiar los ids de estudiantes por correo
+[ ] pensar lo de preguntas, secciones
 [ ] documentacion de api
 [ ] logger de errores y try, catch
 [ ] travis y coveralls
