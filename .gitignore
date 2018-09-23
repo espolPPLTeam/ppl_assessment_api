@@ -8,3 +8,4 @@ npm.error*
 *.log
 .nyc_output/
 yarn.lock
+logs/**.log

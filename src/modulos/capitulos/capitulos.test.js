@@ -1,4 +1,3 @@
-let materiasController = require('./capitulos.controller')({ db: modelos })
 let schema = require('./schema')
 
 describe('CAPITULOS', () => {

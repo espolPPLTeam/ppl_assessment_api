@@ -1,11 +1,6 @@
-const { validarRequest } = require('../../config/utils')
-const db = require('../../config/db').modelos()
-const schema = require('./schema')
-const responses = require('../../config/responses')
-
-const Controller = require('./capitulos.controller')({ db })
-
-module.exports = (app) => {
+module.exports = (app, db, validarRequest, responses, logger) => {
+  const schema = require('./schema')
+  const Controller = require('./capitulos.controller')({ db, logger })
   // CRUD BASICO
 
   // Obtener todos
