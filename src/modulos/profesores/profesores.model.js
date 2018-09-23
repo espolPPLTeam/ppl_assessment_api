@@ -40,6 +40,8 @@ const ProfesoresModel = mongoose.Schema({
   }
 }, { timestamps: true, versionKey: false, collection: 'profesores' })
 
+ProfesoresModel.index({ correo: 1 })
+
 ProfesoresModel.virtual('id').get(function () {
   return this._id
 })
@@ -69,7 +71,7 @@ ProfesoresModel.statics = {
   Obtener ({ id }) {
     const self = this
     return new Promise(function (resolve) {
-      resolve(self.findOne({ _id: id }))
+      resolve(self.findOne({ correo: id }))
     })
   },
   ObtenerTodosFiltrado () {
@@ -81,13 +83,13 @@ ProfesoresModel.statics = {
   ObtenerFiltrado ({ id }) {
     const self = this
     return new Promise(function (resolve) {
-      resolve(self.findOne({ _id: id }, { paralelos: 0, grupos: 0, clave: 0 }))
+      resolve(self.findOne({ correo: id }, { paralelos: 0, grupos: 0, clave: 0 }))
     })
   },
   Actualizar ({ id, nombres, apellidos, correo }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({ _id: id }, { $set: { id, nombres, apellidos, correo } }).then((accionEstado) => {
+      self.updateOne({ correo: id }, { $set: { id, nombres, apellidos } }).then((accionEstado) => {
         resolve(!!accionEstado.nModified)
       })
     })
@@ -95,7 +97,7 @@ ProfesoresModel.statics = {
   Eliminar ({ id }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({ _id: id }, { $set: { estado: 'inactivo' } }).then((accionEstado) => {
+      self.updateOne({ correo: id }, { $set: { estado: 'inactivo' } }).then((accionEstado) => {
         resolve(!!accionEstado.nModified)
       })
     })
@@ -103,7 +105,7 @@ ProfesoresModel.statics = {
   AnadirParalelo ({ profesoresId, paralelosId }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({ _id: profesoresId }, { $addToSet: { 'paralelos': paralelosId } }).then((accionEstado) => {
+      self.updateOne({ correo: profesoresId }, { $addToSet: { 'paralelos': paralelosId } }).then((accionEstado) => {
         resolve(accionEstado.nModified !== 0)
       })
     })
@@ -111,7 +113,7 @@ ProfesoresModel.statics = {
   EliminarParalelo ({ profesoresId, paralelosId }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({ _id: profesoresId }, { $pull: { 'paralelos': paralelosId } }).then((accionEstado) => {
+      self.updateOne({ correo: profesoresId }, { $pull: { 'paralelos': paralelosId } }).then((accionEstado) => {
         resolve(accionEstado.nModified !== 0)
       })
     })
@@ -119,7 +121,7 @@ ProfesoresModel.statics = {
   AnadirGrupo ({ profesoresId, gruposId }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({ _id: profesoresId }, { $addToSet: { 'grupos': gruposId } }).then((accionEstado) => {
+      self.updateOne({ correo: profesoresId }, { $addToSet: { 'grupos': gruposId } }).then((accionEstado) => {
         resolve(accionEstado.nModified !== 0)
       })
     })
@@ -127,7 +129,7 @@ ProfesoresModel.statics = {
   EliminarGrupos ({ profesoresId, gruposIds }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({ _id: profesoresId }, { $pull: { 'grupos': { $in: gruposIds } } }).then((accionEstado) => {
+      self.updateOne({ correo: profesoresId }, { $pull: { 'grupos': { $in: gruposIds } } }).then((accionEstado) => {
         resolve(accionEstado.nModified !== 0)
       })
     })

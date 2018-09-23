@@ -9,7 +9,7 @@ describe('PROFESORES', () => {
   beforeEach(async () => {
     let ProfesorModelo = new modelos.Profesores(profesor)
     let ProfesorCreado = await ProfesorModelo.Crear()
-    profesoresId = ProfesorCreado['_id']
+    profesoresId = ProfesorCreado['correo']
   })
 
   afterEach(async function() {
@@ -52,9 +52,9 @@ describe('PROFESORES', () => {
   })
 
   context('Actualizar', () => {
-    let { nombres, apellidos, correo } = profesor2
+    let { nombres, apellidos } = profesor2
     it('@T30 Caso exitoso', async () => {
-      let res = await request(app).put(`/api/ppl/profesores/${profesoresId}`).send({ nombres, apellidos, correo })
+      let res = await request(app).put(`/api/ppl/profesores/${profesoresId}`).send({ nombres, apellidos })
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
 
@@ -63,10 +63,9 @@ describe('PROFESORES', () => {
       expect(profesorEncontrado).to.not.equal(null)
       expect(profesorEncontrado).to.have.property('nombres', profesor2.nombres)
       expect(profesorEncontrado).to.have.property('apellidos', profesor2.apellidos)
-      expect(profesorEncontrado).to.have.property('correo', profesor2.correo)
     })
     it('@T31 Estudiante no existe', async () => {
-      let res = await request(app).put(`/api/ppl/profesores/aaaaaa`).send({ nombres, apellidos, correo })
+      let res = await request(app).put(`/api/ppl/profesores/aaaaaa`).send({ nombres, apellidos })
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
 

@@ -1,2 +1,9 @@
-let a = 3
-console.log(!!a)
+const logger = require('./src/config/logger')
+
+logger.info('Mi info')
+
+// action: get, put
+// category: en que api
+// createdBy: quien uso el api
+// message: 
+// diff

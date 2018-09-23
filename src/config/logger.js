@@ -5,10 +5,15 @@ const myFormat = printf(info => {
   return `${info.timestamp} ${info.level}: ${info.message}`
 })
 let transportsFiles = []
-if (process.env.NODE_ENV !== 'testing' && process.env.NODE_ENV !== 'development') {
+let exceptionHandlersFiles = []
+if (process.env.NODE_ENV === 'production') {
   transportsFiles = [
-    new winston.transports.File({ filename: 'error.ppl.log', level: 'error' }),
-    new winston.transports.File({ filename: 'debug.ppl.log', level: 'info' })
+    new winston.transports.File({ filename: 'error.api.ppl.log', level: 'error' }),
+    new winston.transports.File({ filename: 'debug.api.ppl.log', level: 'info' })
+  ]
+
+  exceptionHandlersFiles = [
+    new transports.File({ filename: 'exceptions.api.ppl.log' })
   ]
 }
 
@@ -18,12 +23,10 @@ const logger = winston.createLogger({
     myFormat
   ),
   transports: transportsFiles,
-  exceptionHandlers: [
-    new transports.File({ filename: 'exceptions.ppl.log' })
-  ]
+  exceptionHandlers: exceptionHandlersFiles
 })
 
-if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'testing' && !process.env.TDD) {
+if (process.env.NODE_ENV === 'development') {
   logger.add(new winston.transports.Console({
     format: combine(
       timestamp(),

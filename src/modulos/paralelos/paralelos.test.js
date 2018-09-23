@@ -17,7 +17,7 @@ describe('PARALELOS', () => {
 
     let ProfesorModelo = new modelos.Profesores(profesor)
     let ProfesorCreado = await ProfesorModelo.Crear()
-    profesoresId = ProfesorCreado['_id']
+    profesoresId = ProfesorCreado['correo']
   })
 
   afterEach(async () => {

@@ -51,6 +51,8 @@ const EstudiantesSchema = mongoose.Schema({
   }
 }, { timestamps: true, versionKey: false, collection: 'estudiantes' })
 
+EstudiantesSchema.index({ correo: 1 })
+
 EstudiantesSchema.virtual('id').get(function () {
   return this._id
 })

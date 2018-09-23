@@ -15,12 +15,11 @@ let profesor = {
 
 let profesorActualizar = {
   type: 'object',
-  minProperties: 3,
+  minProperties: 2,
   additionalProperties: false,
   properties: {
     nombres: { type: 'string' },
-    apellidos: { type: 'string' },
-    correo: { type: 'string', format: 'email' }
+    apellidos: { type: 'string' }
   }
 }
 

@@ -44,13 +44,17 @@
 [x] Lecciones
 
 // Domingo
-[ ] cambiar los ids de estudiantes por correo
-[ ] pensar lo de preguntas, secciones
+[x] cambiar los ids de estudiantes por correo
 [ ] documentacion de api
 [ ] logger de errores y try, catch
 [ ] travis y coveralls
 [ ] analizar gets especiales
 [ ] Unir los proyectos apis y los archivos estaticos en un solo proyectos git con git submodules
+[ ] refactorizar
+
+[ ] pruebas con docker
+
+[ ] pensar lo de preguntas, secciones
 
 
 
