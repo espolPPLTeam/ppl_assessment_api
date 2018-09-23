@@ -9,7 +9,7 @@ describe('ESTUDIANTES', () => {
   beforeEach(async () => {
     let EstudianteModelo = new modelos.Estudiantes(estudiante)
     let EstudianteCreado = await EstudianteModelo.Crear()
-    estudiantesId = EstudianteCreado['_id']
+    estudiantesId = EstudianteCreado['correo']
   })
 
   afterEach(async function() {
@@ -52,23 +52,21 @@ describe('ESTUDIANTES', () => {
   })
 
   context('Actualizar', () => {
-    let { nombres, apellidos, carrera, matricula, correo } = estudiante2
+    let { nombres, apellidos, carrera, matricula } = estudiante2
     it('@T30 Caso exitoso', async () => {
-      let res = await request(app).put(`/api/ppl/estudiantes/${estudiantesId}`).send({ nombres, apellidos, carrera, matricula, correo })
+      let res = await request(app).put(`/api/ppl/estudiantes/${estudiantesId}`).send({ nombres, apellidos, carrera, matricula })
       expect(res.body.estado).to.equal(true)
       expect(res.body.codigoEstado).to.equal(200)
 
       // verificar que los cambios fueron hechos
       let estudianteEncontrado = await modelos.Estudiantes.Obtener({ id: estudiantesId })
       expect(estudianteEncontrado).to.not.equal(null)
-      expect(estudianteEncontrado).to.have.property('nombres', estudiante2.nombres)
       expect(estudianteEncontrado).to.have.property('apellidos', estudiante2.apellidos)
       expect(estudianteEncontrado).to.have.property('carrera', estudiante2.carrera)
       expect(estudianteEncontrado).to.have.property('matricula', estudiante2.matricula)
-      expect(estudianteEncontrado).to.have.property('correo', estudiante2.correo)
     })
     it('@T31 Estudiante no existe', async () => {
-      let res = await request(app).put(`/api/ppl/estudiantes/aaaaaa`).send({ nombres, apellidos, carrera, matricula, correo })
+      let res = await request(app).put(`/api/ppl/estudiantes/aaaaaa`).send({ nombres, apellidos, carrera, matricula })
       expect(res.body.estado).to.equal(false)
       expect(res.body.codigoEstado).to.equal(200)
 

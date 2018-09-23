@@ -86,19 +86,19 @@ EstudiantesSchema.statics = {
   Obtener ({ id }) {
     const self = this
     return new Promise(function (resolve) {
-      resolve(self.findOne({ _id: id }))
+      resolve(self.findOne({ correo: id }))
     })
   },
   ObtenerFiltrado ({ id }) {
     const self = this
     return new Promise(function (resolve) {
-      resolve(self.findOne({ _id: id }, { lecciones: 0, paralelos: 0, grupos: 0, clave: 0 }))
+      resolve(self.findOne({ correo: id }, { lecciones: 0, paralelos: 0, grupos: 0, clave: 0 }))
     })
   },
-  Actualizar ({ id, nombres, apellidos, carrera, matricula, correo }) {
+  Actualizar ({ id, nombres, apellidos, carrera, matricula }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({ _id: id }, { $set: { nombres, apellidos, carrera, matricula, correo } }).then((accionEstado) => {
+      self.updateOne({ correo: id }, { $set: { nombres, apellidos, carrera, matricula } }).then((accionEstado) => {
         resolve(!!accionEstado.nModified)
       })
     })
@@ -106,7 +106,7 @@ EstudiantesSchema.statics = {
   Eliminar ({ id }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({ _id: id }, { $set: { estado: 'inactivo' } }).then((accionEstado) => {
+      self.updateOne({ correo: id }, { $set: { estado: 'inactivo' } }).then((accionEstado) => {
         resolve(!!accionEstado.nModified)
       })
     })
@@ -114,7 +114,7 @@ EstudiantesSchema.statics = {
   AnadirParalelo ({ estudiantesId, paralelosId }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({ _id: estudiantesId }, { $addToSet: { 'paralelos': paralelosId } }).then((accionEstado) => {
+      self.updateOne({ correo: estudiantesId }, { $addToSet: { 'paralelos': paralelosId } }).then((accionEstado) => {
         resolve(!!accionEstado.nModified)
       })
     })
@@ -122,7 +122,7 @@ EstudiantesSchema.statics = {
   EliminarParalelo ({ estudiantesId, paralelosId }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({ $and: [{ _id: estudiantesId }, { 'paralelos': { $in: [paralelosId] } }] }, { $pull: { 'paralelos': paralelosId } }).then((accionEstado) => {
+      self.updateOne({ $and: [{ correo: estudiantesId }, { 'paralelos': { $in: [paralelosId] } }] }, { $pull: { 'paralelos': paralelosId } }).then((accionEstado) => {
         resolve(!!accionEstado.nModified)
       })
     })
@@ -138,7 +138,7 @@ EstudiantesSchema.statics = {
   AnadirGrupo ({ estudiantesId, gruposId }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({ _id: estudiantesId }, { $addToSet: { 'grupos': gruposId } }).then((accionEstado) => {
+      self.updateOne({ correo: estudiantesId }, { $addToSet: { 'grupos': gruposId } }).then((accionEstado) => {
         resolve(!!accionEstado.nModified)
       })
     })
@@ -146,7 +146,7 @@ EstudiantesSchema.statics = {
   EliminarGrupo ({ gruposId, estudiantesId }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({ _id: estudiantesId }, { $pull: { 'grupos': gruposId } }).then((accionEstado) => {
+      self.updateOne({ correo: estudiantesId }, { $pull: { 'grupos': gruposId } }).then((accionEstado) => {
         resolve(!!accionEstado.nModified)
       })
     })

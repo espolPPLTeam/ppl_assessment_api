@@ -21,7 +21,7 @@ describe('GRUPOS', () => {
 
     let EstudianteModelo = new modelos.Estudiantes(estudiante)
     let EstudianteCreado = await EstudianteModelo.Crear()
-    estudiantesId = EstudianteCreado['_id']
+    estudiantesId = EstudianteCreado['correo']
   })
 
   afterEach(async function() {

@@ -44,18 +44,23 @@
 [x] Lecciones
 
 // Domingo
-[x] Respuestas
-
-[ ] Calificaciones
-
-[ ] Rubricas
-
-// Lunes
 [ ] cambiar los ids de estudiantes por correo
 [ ] pensar lo de preguntas, secciones
 [ ] documentacion de api
 [ ] logger de errores y try, catch
 [ ] travis y coveralls
 [ ] analizar gets especiales
+[ ] Unir los proyectos apis y los archivos estaticos en un solo proyectos git con git submodules
+
+
+
+// Lunes
+[x] Respuestas
+
+[ ] Calificaciones
+
+[ ] Rubricas
+
+// Martes
 [ ] permisos
 [ ] dockerfile

@@ -13,7 +13,7 @@ describe('PARALELOS', () => {
   beforeEach(async () => {
     let EstudianteModelo = new modelos.Estudiantes(estudiante)
     let EstudianteCreado = await EstudianteModelo.Crear()
-    estudiantesId = EstudianteCreado['_id']
+    estudiantesId = EstudianteCreado['correo']
 
     let ProfesorModelo = new modelos.Profesores(profesor)
     let ProfesorCreado = await ProfesorModelo.Crear()

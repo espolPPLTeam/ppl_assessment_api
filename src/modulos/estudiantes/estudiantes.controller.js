@@ -13,8 +13,8 @@ module.exports = ({ db }) => {
       let estudiantes = await db.Estudiantes.ObtenerFiltrado({ id })
       return responses.OK(estudiantes)
     },
-    async Actualizar ({ id, nombres, apellidos, carrera, matricula, correo }) {
-      let fueActulizado = await db.Estudiantes.Actualizar({ id, nombres, apellidos, carrera, matricula, correo })
+    async Actualizar ({ id, nombres, apellidos, carrera, matricula }) {
+      let fueActulizado = await db.Estudiantes.Actualizar({ id, nombres, apellidos, carrera, matricula })
       if (fueActulizado) {
         return responses.OK('Actualizado correctamente')
       }

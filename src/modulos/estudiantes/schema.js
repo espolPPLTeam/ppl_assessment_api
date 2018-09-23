@@ -17,13 +17,12 @@ let estudiante = {
 
 let estudianteActualizar = {
   type: 'object',
-  minProperties: 5,
+  minProperties: 4,
   additionalProperties: false,
   properties: {
     nombres: { type: 'string' },
     apellidos: { type: 'string' },
     matricula: { type: 'string', minLength: 9, maxLength: 9 },
-    correo: { type: 'string', format: 'email' },
     carrera: { type: 'string' }
   }
 }
