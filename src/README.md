@@ -41,16 +41,16 @@
 [x] Preguntas
 
 // Viernes
-[ ] Lecciones
+[x] Lecciones
 
-// Sabado
-[ ] Respuestas
+// Domingo
+[x] Respuestas
 
 [ ] Calificaciones
 
 [ ] Rubricas
 
-// Domingo
+// Lunes
 [ ] cambiar los ids de estudiantes por correo
 [ ] pensar lo de preguntas, secciones
 [ ] documentacion de api

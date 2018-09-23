@@ -27,7 +27,8 @@ const CalificacionesSchema = mongoose.Schema({
   }],
   calificacion: {
     type: Number,
-    required: true
+    required: true,
+    'default': 0
   },
   estudianteCalificado: {
     type: String,

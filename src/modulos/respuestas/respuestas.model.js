@@ -71,10 +71,18 @@ RespuestasModel.statics = {
       resolve(self.find({}))
     })
   },
-  Obtener (id) {
+  Obtener ({ id }) {
     const self = this
     return new Promise(function (resolve) {
       resolve(self.findOne({ _id: id }))
+    })
+  },
+  Actualizar ({ id, estudiante, pregunta, paralelo, grupo, respuesta, imagen }) {
+    const self = this
+    return new Promise(function (resolve) {
+      self.updateOne({ _id: id }, { $set: { estudiante, pregunta, paralelo, grupo, respuesta, imagen } }).then((accionEstado) => {
+        resolve(!!accionEstado.nModified)
+      })
     })
   }
 }

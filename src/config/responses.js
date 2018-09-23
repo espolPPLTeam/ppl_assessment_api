@@ -14,10 +14,13 @@ const NO_AUTORIZADO = { datos: { mensaje_error: 'No autorizado' }, codigoEstado:
 
 const NO_ENVIO_JWT = { datos: { mensaje_error: 'No envio el jwt en el Bearer' }, codigoEstado: 401, estado: false }
 
-const CREADO = { datos: { mensaje: 'Creado Correctamente' }, codigoEstado: 201, estado: true }
-
 const OK = (datos) => {
   const resp = { estado: true, datos, codigoEstado: 200 }
+  return resp
+}
+
+const CREADO = (datos) => {
+  const resp = { estado: true, datos, codigoEstado: 201 }
   return resp
 }
 
