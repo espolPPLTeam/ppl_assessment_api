@@ -48,6 +48,11 @@ const LeccionesSchema = mongoose.Schema({
   },
   fechaFin: {
     type: Date
+  },
+  estado: {
+    type: String,
+    default: 'pendiente',
+    enum: ['pendiente', 'tomando', 'terminado', 'calificado']
   }
 }, { timestamps: true, versionKey: false, collection: 'lecciones' })
 

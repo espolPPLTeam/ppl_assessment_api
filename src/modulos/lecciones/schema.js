@@ -17,6 +17,7 @@ let leccion = {
     paralelo: { type: 'string', minimum: 2 },
     fechaInicio: { type: 'string', minimum: 2 },
     fechaFin: { type: 'string', minimum: 2 },
+    estado: { type: 'string' },
     createdAt: { type: 'string' },
     updatedAt: { type: 'string' }
   }
@@ -25,7 +26,7 @@ let leccion = {
 let leccionCrear = {
   type: 'object',
   minProperties: 9,
-  additionalProperties: false, // por el campo fechaFin, puede o no existir
+  additionalProperties: true, // por el campo fechaFin, puede o no existir
   properties: {
     nombre: { type: 'string', minLength: 2 },
     capitulo: { type: 'string', minLength: 2 },
@@ -35,10 +36,10 @@ let leccionCrear = {
       contains: { type: 'string' }
     },
     tiempoEstimadoEnMinutos: { type: 'number', minimum: 2 },
-    puntaje: { type: 'number', minimum: 2 },
+    puntaje: { type: 'number' },
     tipo: { type: 'string', enum: ['tutorial', 'laboratorio'] },
     paralelo: { type: 'string', minimum: 2 },
-    fechaInicio: { type: 'string', minimum: 2 }
+    fechaInicio: { type: 'string', minimum: 2 },
   }
 }
 
