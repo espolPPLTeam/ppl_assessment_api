@@ -57,6 +57,14 @@ module.exports = (app) => {
 
   // APIs especiales
 
+  // Bulk create seccion - preguntas
+
+  app.route('/secciones/bulkCreate')
+    .post(async (req, res) => {
+      let resp = await Controller.BulkCreate(req.body)
+      return res.status(resp.codigoEstado).send(resp)
+    })
+
   // anadir una pregunta
   app.route('/secciones/:seccionesId/preguntas/:preguntasId')
     .put(async (req, res) => {

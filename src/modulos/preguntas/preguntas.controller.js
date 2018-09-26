@@ -13,7 +13,7 @@ module.exports = ({ db }) => {
       let pregunta = await db.Preguntas.Obtener({ id })
       return responses.OK(pregunta)
     },
-    async Crear ({ nombre, tiempoEstimado, creador, tipoPregunta, puntaje, descripcion }) {
+    async Crear ({ nombre, tiempoEstimado, creador, tipoPregunta, puntaje, descripcion, idSeccion }) {
       let pregunta = new db.Preguntas({ nombre, tiempoEstimado, creador, tipoPregunta, puntaje, descripcion })
       let preguntaCreada = await pregunta.Crear()
       return responses.OK(preguntaCreada)
