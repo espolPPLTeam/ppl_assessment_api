@@ -137,10 +137,10 @@ EstudiantesSchema.statics = {
       })
     })
   },
-  AnadirGrupo ({ estudiantesId, gruposId }) {
+  AnadirGrupo ({ emailEstudiante, gruposId }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({ correo: estudiantesId }, { $addToSet: { 'grupos': gruposId } }).then((accionEstado) => {
+      self.updateOne({ email: emailEstudiante }, { $addToSet: { 'grupos': gruposId } }).then((accionEstado) => {
         resolve(!!accionEstado.nModified)
       })
     })

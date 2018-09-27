@@ -60,6 +60,15 @@ module.exports = ({ db }) => {
       }
       await db.Estudiantes.EliminarGrupo({ estudiantesId, gruposId })
       return responses.OK('Eliminado el estudiante del grupo')
+    },
+    async BulkCreate ({ nombre, paralelo, estudiantes }) {
+      let grupo = new db.Grupos({ nombre, paralelo, estudiantes })
+      let grupoCreado = await grupo.Crear()
+      const promises = estudiantes.map(async (estudiante) => {
+        await db.Estudiantes.AnadirGrupo({ emailEstudiante: estudiante, gruposId: grupoCreado._id })
+      })
+      await Promise.all(promises)
+      return responses.OK('Agregado correctamente')
     }
   }
   return Object.assign(Object.create(proto), {})

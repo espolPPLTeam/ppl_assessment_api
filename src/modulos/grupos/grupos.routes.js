@@ -78,4 +78,12 @@ module.exports = (app) => {
   // GET /grupos/estudiantes/:estudiantesId | obtener los grupos de un estudiante
 
   // GET /grupos/estudiantes/:estudiantesId/paralelos/:paralelosId | obtener el grupo de un estudiante dado tambien el paralelo
+
+  // POST
+  app.route('/grupos/bulkCreate')
+    .post(async (req, res) => {
+      let resp = await Controller.BulkCreate(req.body)
+      return res.status(resp.codigoEstado).send(resp)
+    })
+
 }
