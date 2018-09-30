@@ -4,6 +4,9 @@ let db = require('mongoose')
 const shortid = require('shortid')
 mongoose.Promise = global.Promise
 
+const validators = require('../../config/validators')
+const errors = require('../../config/errors')
+
 const EstudiantesSchema = mongoose.Schema({
   _id: {
     type: String,
@@ -25,7 +28,7 @@ const EstudiantesSchema = mongoose.Schema({
     type: String
     // unique: true, verificar si da error esto cuando es vacio
   },
-  correo: {
+  email: {
     type: String,
     unique: true
   },
@@ -41,17 +44,30 @@ const EstudiantesSchema = mongoose.Schema({
     ref: 'Paralelos'
   }],
   grupos: [{
-    type: String,
-    ref: 'Grupos'
+    grupo: {
+      type: String,
+      ref: 'Grupos',
+      required: true
+    },
+    paralelo: {
+      type: String,
+      ref: 'Paralelos',
+      required: true
+    },
+    estado: {
+      type: String,
+      enum: ['activo', 'inactivo'],
+      default: 'activo'
+    }
   }],
   estado: {
     type: String,
     enum: ['activo', 'retirado'],
     'default': 'activo'
   }
-}, { timestamps: true, versionKey: false, collection: 'estudiantes' })
+}, { timestamps: true, versionKey: false, collection: 'estudiantes', virtuals: true })
 
-EstudiantesSchema.index({ correo: 1 })
+EstudiantesSchema.index({ email: 1 })
 
 EstudiantesSchema.virtual('id').get(function () {
   return this._id
@@ -73,42 +89,38 @@ EstudiantesSchema.methods = {
 }
 
 EstudiantesSchema.statics = {
-  ObtenerTodos () {
-    const self = this
-    return new Promise(function (resolve) {
-      resolve(self.find({}))
-    })
+  ObtenerUnoPopulate (criteria, projection, options, projectionLecciones, projectionParalelos, projectionGrupos) {
+    return this.findOne(criteria, projection, options)
+      .populate('lecciones', projectionLecciones)
+      .populate('paralelos', projectionParalelos)
+      .populate('grupos', projectionGrupos)
+      .exec()
   },
-  ObtenerTodosFiltrado () {
-    const self = this
-    return new Promise(function (resolve) {
-      resolve(self.find({}, { lecciones: 0, paralelos: 0, grupos: 0, clave: 0 }))
-    })
+  ObtenerUno (criteria, projection, options) {
+    return this.findOne(criteria, projection, options).exec()
   },
-  Obtener ({ id }) {
-    const self = this
-    return new Promise(function (resolve) {
-      resolve(self.findOne({ correo: id }))
-    })
+  ObtenerPopulate (criteria, projection, options, projectionEstudiantes, projectionParalelos) {
+    return this.find(criteria, projection, options)
+      .populate('lecciones', projectionLecciones)
+      .populate('paralelos', projectionParalelos)
+      .populate('grupos', projectionGrupos)
+      .exec()
   },
-  ObtenerFiltrado ({ id }) {
-    const self = this
-    return new Promise(function (resolve) {
-      resolve(self.findOne({ correo: id }, { lecciones: 0, paralelos: 0, grupos: 0, clave: 0 }))
-    })
+  Obtener (criteria, projection, options) {
+    return this.find(criteria, projection, options).exec()
   },
-  Actualizar ({ id, nombres, apellidos, carrera, matricula }) {
+  Actualizar ({ email, nombres, apellidos, carrera, matricula }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({ correo: id }, { $set: { nombres, apellidos, carrera, matricula } }).then((accionEstado) => {
+      self.updateOne({ email }, { $set: { nombres, apellidos, carrera, matricula } }).then((accionEstado) => {
         resolve(!!accionEstado.nModified)
       })
     })
   },
-  Eliminar ({ id }) {
+  Eliminar ({ email }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({ correo: id }, { $set: { estado: 'inactivo' } }).then((accionEstado) => {
+      self.updateOne({ email }, { $set: { estado: 'inactivo' } }).then((accionEstado) => {
         resolve(!!accionEstado.nModified)
       })
     })
@@ -116,7 +128,7 @@ EstudiantesSchema.statics = {
   AnadirParalelo ({ estudiantesId, paralelosId }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({ correo: estudiantesId }, { $addToSet: { 'paralelos': paralelosId } }).then((accionEstado) => {
+      self.updateOne({ email: estudiantesId }, { $addToSet: { 'paralelos': paralelosId } }).then((accionEstado) => {
         resolve(!!accionEstado.nModified)
       })
     })
@@ -124,7 +136,7 @@ EstudiantesSchema.statics = {
   EliminarParalelo ({ estudiantesId, paralelosId }) {
     const self = this
     return new Promise(function (resolve) {
-      self.updateOne({ $and: [{ correo: estudiantesId }, { 'paralelos': { $in: [paralelosId] } }] }, { $pull: { 'paralelos': paralelosId } }).then((accionEstado) => {
+      self.updateOne({ $and: [{ email: estudiantesId }, { 'paralelos': { $in: [paralelosId] } }] }, { $pull: { 'paralelos': paralelosId } }).then((accionEstado) => {
         resolve(!!accionEstado.nModified)
       })
     })
@@ -137,20 +149,45 @@ EstudiantesSchema.statics = {
       })
     })
   },
-  AnadirGrupo ({ emailEstudiante, gruposId }) {
+  AnadirGrupo (idEstudiante, idGrupo, idParalelo, estado) {
     const self = this
-    return new Promise(function (resolve) {
-      self.updateOne({ email: emailEstudiante }, { $addToSet: { 'grupos': gruposId } }).then((accionEstado) => {
-        resolve(!!accionEstado.nModified)
-      })
-    })
+    return this.updateOne(
+      { _id: idEstudiante },
+      { 
+        $addToSet: {
+          grupos: {
+            grupo: idGrupo,
+            paralelo: idParalelo,
+            estado: estado
+          }
+        } 
+      }
+    ).then((doc) => {
+      if (doc.n === 0)
+        return Promise.reject(errors.ERROR_HANDLER({ name: 'UpdateError', message: 'Registro de Estudiante no encontrado' }))
+      if (doc.nModified === 0)
+        return Promise.reject(errors.ERROR_HANDLER({ name: 'UpdateError', message: 'No se pudo modificar el registro de Estudiante' }))
+      if (doc.n == doc.nModified)
+        return Promise.resolve(true)
+      return Promise.reject(errors.ERROR_HANDLER({ name: 'UpdateError', message: 'Error al actualizar Estudiante' }))
+    }).catch((err) => {
+      return Promise.reject(errors.ERROR_HANDLER(err))
+    })    
   },
-  EliminarGrupo ({ gruposId, estudiantesId }) {
-    const self = this
-    return new Promise(function (resolve) {
-      self.updateOne({ correo: estudiantesId }, { $pull: { 'grupos': gruposId } }).then((accionEstado) => {
-        resolve(!!accionEstado.nModified)
-      })
+  CambiarEstadoGrupo (idEstudiante, idGrupo, estado) {
+    return this.updateOne(
+        { _id: idEstudiante, "grupos._id": idGrupo },
+        { $set: { "grupos.$.estado": estado } }
+    ).then((doc) => {
+      if (doc.n === 0)
+        return Promise.reject(errors.ERROR_HANDLER({ name: 'UpdateError', message: 'Registro de Estudiante no encontrado' }))
+      if (doc.nModified === 0)
+        return Promise.reject(errors.ERROR_HANDLER({ name: 'UpdateError', message: 'No se pudo modificar el registro de Estudiante' }))
+      if (doc.n == doc.nModified)
+        return Promise.resolve(true)
+      return Promise.reject(errors.ERROR_HANDLER({ name: 'UpdateError', message: 'Error al actualizar Estudiante' }))
+    }).catch((err) => {
+      return Promise.reject(errors.ERROR_HANDLER(err))
     })
   }
 }
