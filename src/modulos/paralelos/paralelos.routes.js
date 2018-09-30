@@ -58,6 +58,12 @@ module.exports = (app) => {
 
   // =================================================
   // Estudiantes
+
+  app.route('/paralelos/:paralelosId/estudiantes')
+    .get(async (req, res) => {
+      let resp = await Controller.ObtenerEstudiantes({ id: req.params.paralelosId })
+      return res.status(resp.codigoEstado).send(resp)
+    })
   // anadir un estudiante del paralelo
   app.route('/paralelos/:paralelosId/estudiantes/:estudiantesId')
     .put(async (req, res) => {

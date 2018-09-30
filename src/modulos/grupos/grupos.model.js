@@ -57,14 +57,14 @@ GruposSchema.methods = {
 }
 
 GruposSchema.statics = {
-  ObtenerUnoPopulate (criteria, projection, options, projectionEstudiantes, projectionParalelos) {
-    return this.findOne(criteria, projection, options).populate('estudiantes', projectionEstudiantes).populate('paralelo', projectionParalelos).exec()
+  ObtenerUnoPopulate (criteria, projection, options, populate) {
+    return this.findOne(criteria, projection, options).populate(populate).exec()
   },
   ObtenerUno (criteria, projection, options) {
     return this.findOne(criteria, projection, options).exec()
   },
-  ObtenerPopulate (criteria, projection, options, projectionEstudiantes, projectionParalelos) {
-    return this.find(criteria, projection, options).populate('estudiantes', projectionEstudiantes).populate('paralelo', projectionParalelos).exec()
+  ObtenerPopulate (criteria, projection, options, populate) {
+    return this.find(criteria, projection, options).populate(populate).exec()
   },
   Obtener (criteria, projection, options) {
     return this.find(criteria, projection, options).exec()

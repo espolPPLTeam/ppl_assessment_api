@@ -64,17 +64,17 @@ ParalelosSchema.methods = {
 }
 
 ParalelosSchema.statics = {
-  ObtenerTodos () {
-    const self = this
-    return new Promise(function (resolve) {
-      resolve(self.find({}))
-    })
+  ObtenerUnoPopulate (criteria, projection, options, populate) {
+    return this.findOne(criteria, projection, options).populate(populate).exec()
   },
-  Obtener ({ id }) {
-    const self = this
-    return new Promise(function (resolve) {
-      resolve(self.findOne({ _id: id }))
-    })
+  ObtenerUno (criteria, projection, options) {
+    return this.findOne(criteria, projection, options).exec()
+  },
+  ObtenerPopulate (criteria, projection, options, populate) {
+    return this.find(criteria, projection, options).populate(populate).exec()
+  },
+  Obtener (criteria, projection, options) {
+    return this.find(criteria, projection, options).exec()
   },
   Actualizar ({ id, nombre, anio, termino, materia }) {
     const self = this
@@ -152,7 +152,7 @@ ParalelosSchema.statics = {
   ObtenerEstudiantes ({ id }) {
     const self = this
     return new Promise(function (resolve) {
-      resolve(self.findOne({ _id: id }).populate('estudiantes').select('-estado -profesores -nombre -anio -termino -materia -nombreMateria'))
+      resolve(self.findOne({ _id: id }).populate('estudiantes').populate('grupos').select('-estado -profesores -nombre -anio -termino -materia -nombreMateria'))
     })
   }
 }

@@ -12,11 +12,19 @@ module.exports = ({ db }) => {
     },
     async ObtenerPorId (idGrupo) {
       try {
-        const projectionEstudiantes = '_id nombres apellidos'
-        const projectionParalelos = '_id nombreMateria nombre materia'
+        const populate = [
+          {
+            path: 'estudiantes',
+            select: '_id nombres apellidos'
+          },
+          {
+            path: 'paralelo',
+            select: '_id nombreMateria nombre materia'
+          }
+        ]
         const criteria = { _id: idGrupo }
         const options = { lean: true }
-        let grupos = await db.Grupos.ObtenerUnoPopulate( criteria, {}, options, projectionEstudiantes, projectionParalelos )
+        let grupos = await db.Grupos.ObtenerUnoPopulate( criteria, {}, options, populate)
         return responses.OK(grupos)
       } catch (err) {
         console.log(err)
