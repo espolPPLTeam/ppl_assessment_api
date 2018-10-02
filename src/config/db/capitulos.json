@@ -1,0 +1,559 @@
+[
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 1.1.- Ondas periódicas" 
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 1.2.- Descripción matemática de una onda"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 1.3.- Rapidez de una onda transversal"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 1.4.- Energía del movimiento ondulatorio"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 1.5.- Interferencia de ondas, condiciones de frontera y superposición"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 1.6.- Ondas estacionarias en una cuerda"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 2.1.- Ondas sonoras"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 2.2.- Rapidez de ondas sonoras"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 2.3.- Intensidad de las ondas sonoras"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 2.4.- Ondas sonoras estacionarias y modos normales"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 2.5.- Resonancia y sonido"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 2.6.- Interferencia de ondas"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 2.7.- Pulsos"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 2.8.- Efecto Doppler"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 2.9.- Ondas de choque"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 3.1.- Ecuación del estado" 
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 3.2.- Propiedades moleculares de la materia"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 3.3.- Modelo cinético molecular del gas ideal"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 3.4.- Capacidades caloríficas"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 3.5.- Rapidez molecular"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 3.6.- Fases de la materia"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 4.1.- Sistemas termodinámicos"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 4.2.- Trabajo realizado al cambiar el volumen"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 4.3.- Trayectoria entre estados termodinámicos"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 4.4.- Energía interna y la primera ley de la termodinámica"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 4.5.- Tipos de procesos termodinámicos"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 4.6.- Energía interna de un gas ideal"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 4.7.- Capacidad calorífica de un gas ideal"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 4.8.- Procesos adiabáticos para un gas ideal"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 5.1.- Dirección de los procesos termodinámicos" 
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 5.2.- Máquinas térmicas"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 5.3.- Motores de combustión interna"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 5.4.- Refrigeradores"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 5.5.- Segunda ley de la termodinámica"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 5.6.- Ciclo de Carnot"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 5.7.- Entropía"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 6.1.- Carga eléctrica y campo eléctrico"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 6.2.- Conductores, aislantes y cargas inducidas"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 6.3.- Ley de Coulomb"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 6.4.- Campo eléctrico y fuerzas eléctricas"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 6.5.- Cálculos campos eléctricos"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 6.6.- Líneas de campo eléctrico"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 6.7.- Dipolo"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 7.1.- Carga y flujo"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 7.2.- Cálculo del flujo eléctrico" 
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 7.3.- Ley de Gauss"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 7.4.- Aplicaciones de la ley de Gauss"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 7.5.- Cargas en conductores"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 8.1.- Energía potencial eléctrico"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 8.2.- Potencial eléctrico"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 8.3.- Cálculo del potencial eléctrico"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 8.4.- Superficies equipotenciales"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 8.5.- Gradiente de potencial"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 9.1.- Capacitores y capacitancia"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 9.2.- Capacitores en serie y en paralelo"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 9.3.- Almacenamiento de energía en capacitores"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 9.4.- Dieléctricos"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 9.5.- Modelo molecular de la carga inducida"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 9.6.- La ley de Gauss en los dieléctricos"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 10.1.- Corriente eléctrica"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 10.2.- Resistividad"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 10.3.- Resistencia"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 10.4.- Fuerza electromotriz y circuitos"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 10.5.- Energía y potencia en circuitos eléctricos"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 10.6.- Teoría de la conducción metálica"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 11.1.- Resistencias en serie y en paralelo"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 11.2.- Reglas de Kirchhoff"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 11.3.- Instrumentos de medición eléctrica"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 11.4.- Circuitos RC"
+  },
+  {
+    "materia": "FISG1002",
+    "nombre": "Capítulo 11.5.- Sistemas de distribución de energía"
+  },
+
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 1.1.- Magnetismo" 
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 1.2.- Campo magnético"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 1.3.- Lineas de campo magnético y flujo magnético"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 1.4.- Movimiento de partículas cargadas en un campo magnético"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 1.5.- Aplicaciones del movimiento de partículas cargadas"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 1.6.- Fuerza magnética sobre un conductor que transporta corriente"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 1.7.- Fuerza y torca en una espira de corriente"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 1.8.- Motor de corriente directa"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 1.9.- Efecto Hall"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 2.1.- Campo magnético de una carga en movimiento"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 2.2.- Campo magnético de un elemento de corriente"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 2.3.- Campo magnético de un conductor que transporta corriente"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 2.4.- Fuerza entre alambres paralelos"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 2.5.- Campo magnético de una espira circular de corriente"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 2.6.- Ley de Ampere"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 2.7.- Aplicaciones de la ley de Ampere" 
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 2.8.- Materiales magnéticos"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 3.1.- Experimentos de inducción"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 3.2.- Ley de Faraday"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 3.3.- Ley de Lenz"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 3.4.- Fuerza electromotriz de movimiento"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 3.5.- Campos eléctricos inducidos"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 3.6.- Corrientes parásitas"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 3.7.- Corriente de desplazamiento"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 4.1.- Inductancia mutua"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 4.2.- Autoinductancia e inductores"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 4.3.- Energía del campo magnético"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 4.4.- El circuito R-L"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 4.5.- El circuito L-C"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 4.6.- EL circuito L-R-C en serie" 
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 5.1.- Fasores y corrientes alternas"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 5.2.- Resistencia y reactancia"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 5.3.- El circuito L-R-C en paralelo"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 5.4.- Potencia en circuitos de corriente alterna"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 5.5.- Resonancia en los circuitos de corriente alterna"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 5.6.- Transformadores"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 6.1.- Ecuaciones de Maxwell y ondas electromagnéticas"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 6.2.- Ondas electromagnéticas planas y rapidez de la luz"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 6.3.- Ondas electromagnéticas sinusoidales"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 6.4.- Energía y cantidad de movimiento de las ondas electromagnéticas"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 6.5.- Ondas electromagnéticas estacionarias"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 7.1.- La naturaleza de la luz"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 7.2.- Reflexión y refracción"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 7.3.- Reflexión interna total"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 7.4.- Dispersión" 
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 7.5.- Polarización"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 7.6.- Dispersión de la luz"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 7.7.- Principio de Huygens"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 8.1.- Reflexión y refracción en una superficie plana"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 8.2.- Reflexión en una superficie esférica"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 8.3.- Refracción en una superficie esférica"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 8.4.- Lentes delgadas"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 8.5.- Cámaras fotográficas"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 8.6.- El ojo"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 8.7.- La lente de aumento"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 8.8.- Microscopios y telescopios"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 9.1.- Interferencia y fuentes coherentes"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 9.2.- Interferencia de la luz procedente de dos fuentes"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 9.3.- La intensidad en los patrones de interferencia"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 9.4.- Interferencia en películas delgadas"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 9.5.- El interferómetro de Michelson"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 10.1.- Difracción de Fresnel y Fraunhofer"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 10.2.- Difracción desde una sola ranura"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 10.3.- Intensidad en el patrón de una sola ranura"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 10.4.- Ranuras múltiples"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 10.5.- Rejilla de difracción"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 10.6.- Difracción de rayos x"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 10.7.- Aberturas circulares y poder de resolución"
+  },
+  {
+    "materia": "FISG1003",
+    "nombre": "Capítulo 10.8.- Holografía"
+  }
+]
