@@ -60,6 +60,12 @@ SeccionesModel.statics = {
       resolve(self.find({}))
     })
   },
+  ObtenerTodasPopulate () {
+    const self = this
+    return new Promise(function (resolve) {
+      resolve(self.find({}).populate(['capitulo', 'preguntas', 'creador']))
+    })
+  },
   Obtener ({ id }) {
     const self = this
     return new Promise(function (resolve) {
@@ -96,6 +102,22 @@ SeccionesModel.statics = {
       self.updateOne({ $and: [{ _id: seccionesId }, { 'preguntas': { $in: [preguntasId] } }] }, { $pull: { 'preguntas': preguntasId } }).then((accionEstado) => {
         resolve(!!accionEstado.nModified)
       })
+    })
+  },
+  AnadirPreguntasBulk (_id, preguntas) {
+    const self = this
+    return new Promise((resolve, reject) => {
+      self.updateOne({ _id }, 
+        { 
+          $addToSet: {
+            'preguntas': { $each: preguntas } 
+          } 
+        }).then((accionEstado) => {
+          if (accionEstado.nModified === 1) {
+            resolve(true)
+          }
+          reject(false)
+        })
     })
   }
 }

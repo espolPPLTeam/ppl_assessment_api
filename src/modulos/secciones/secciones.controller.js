@@ -3,7 +3,7 @@ module.exports = ({ db }) => {
   const proto = {
     async ObtenerTodos () {
       try {
-        let secciones = await db.Secciones.ObtenerTodos()
+        let secciones = await db.Secciones.ObtenerTodasPopulate()
         return responses.OK(secciones)
       } catch (err) {
         return responses.ERROR_SERVIDOR
@@ -51,6 +51,19 @@ module.exports = ({ db }) => {
         return responses.NO_OK(['La seccion o la pregunta no existe'])
       }
       return responses.OK('Eliminada la pregunta de la seccion')
+    },
+
+    async BulkCreate ({ nombre, descripcion, creador, capitulo, tipo, preguntas }) {
+      let seccion = new db.Secciones({ nombre, descripcion, creador, capitulo, tipo })
+      let seccionCreada = await seccion.Crear()
+      await db.Capitulos.AnadirSeccion(capitulo, seccionCreada._id)
+      let preguntasCreadas = await db.Preguntas.BulkInsert(preguntas)
+      let ids = preguntasCreadas.map((pregunta) => {
+        return pregunta._id
+      })
+      await db.Secciones.AnadirPreguntasBulk(seccionCreada._id, ids)
+      seccionCreada.preguntas = preguntasCreadas
+      return responses.OK(seccionCreada)  
     }
   }
   return Object.assign(Object.create(proto), {})

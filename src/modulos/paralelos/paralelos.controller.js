@@ -133,6 +133,58 @@ module.exports = ({ db }) => {
         db.Grupos.Eliminar({ id: gruposId })
       ])
       return responses.OK('Eliminado el grupo del paralelo')
+    },
+    async ObtenerEstudiantes ({ id }) {
+      
+      let options = { lean: true }
+
+      let criteriaGrupos = {
+        paralelo: id
+      }
+      let populateGrupos = {
+        path: 'estudiantes',
+        select: '_id nombres apellidos'
+      }
+      let projectionGrupos = '-createdAt -updatedAt -paralelo'      
+      
+      let criteriaParalelos = {
+        _id: id
+      }
+      let populateParalelos = {
+        path: 'estudiantes',
+        select: '_id nombres apellidos'
+      }
+      let projectionParalelos = '-createdAt -updatedAt -grupos -profesores -nombre -estado -anio -termino -materia -nombreMateria'
+
+
+      let values = await Promise.all([
+        await db.Grupos.ObtenerPopulate(criteriaGrupos, projectionGrupos, options, populateGrupos),
+        await db.Paralelos.ObtenerUnoPopulate(criteriaParalelos, projectionParalelos, options, populateParalelos)
+      ])
+
+      const grupos = values[0]
+      const paralelo = values[1]
+
+      // Pocas cosas en la vida son peores que esto
+      for (let i = grupos.length - 1; i >= 0; i--) {
+        let grupoActual = grupos[i]
+        for (let j = grupoActual.estudiantes.length - 1; j >= 0; j--) {
+          let estudianteActual = grupoActual.estudiantes[j]
+          for (let k = paralelo.estudiantes.length - 1; k >= 0; k--) {
+            if (estudianteActual._id === paralelo.estudiantes[k]._id) {
+              paralelo.estudiantes.splice(k, 1)
+              break
+            }
+          }
+        }
+      }
+
+      let datos = {
+        estudiantesSinGrupo: paralelo.estudiantes,
+        grupos: grupos
+      }
+      
+      return responses.OK(datos)
     }
   }
   return Object.assign(Object.create(proto), {})

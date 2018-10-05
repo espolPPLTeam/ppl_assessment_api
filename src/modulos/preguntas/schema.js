@@ -17,7 +17,7 @@ let pregunta = {
 
 let preguntaCrear = {
   type: 'object',
-  minProperties: 6,
+  minProperties: 7,
   additionalProperties: false,
   properties: {
     nombre: { type: 'string' },
@@ -25,7 +25,8 @@ let preguntaCrear = {
     creador: { type: 'string' },
     tipoPregunta: { type: 'string', enum: ['v/f', 'opcionMultiple', 'justificacion'] },
     puntaje: { type: 'number', minimum: 1, maximun: 50 },
-    descripcion: { type: 'string' }
+    descripcion: { type: 'string' },
+    idSeccion: { type: 'string' }
   }
 }
 

@@ -13,8 +13,8 @@ module.exports = ({ db }) => {
       let leccion = await db.Lecciones.Obtener({ id })
       return responses.OK(leccion)
     },
-    async Crear ({ nombre, capitulo, secciones, creador, tiempoEstimadoEnMinutos, puntaje, tipo, paralelo, fechaInicio }) {
-      let leccion = new db.Lecciones({ nombre, capitulo, secciones, creador, tiempoEstimadoEnMinutos, puntaje, tipo, paralelo, fechaInicio })
+    async Crear ({ nombre, capitulo, secciones, creador, tiempoEstimadoEnMinutos, puntaje, tipo, paralelo, fechaInicio, estado }) {
+      let leccion = new db.Lecciones({ nombre, capitulo, secciones, creador, tiempoEstimadoEnMinutos, puntaje, tipo, paralelo, fechaInicio, estado })
       let leccionCreada = await leccion.Crear()
       return responses.OK(leccionCreada)
     },

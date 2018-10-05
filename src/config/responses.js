@@ -24,9 +24,20 @@ const CREADO = (datos) => {
   return resp
 }
 
-const NO_OK = (datos) => {
-  const resp = { estado: false, datos, codigoEstado: 200 }
-  return resp
+const NO_OK = (mensaje) => {
+  return {
+    estado: false,
+    mensaje,
+    codigoEstado: 400
+  }
+}
+
+const REGISTRO_NO_ENCONTRADO = (mensaje) => {
+  return {
+    estado: false,
+    mensaje,
+    codigoEstado: 404
+  }
 }
 
 module.exports = {
@@ -35,5 +46,6 @@ module.exports = {
   OK,
   NO_OK,
   CREADO,
-  NO_ENVIO_JWT
+  NO_ENVIO_JWT,
+  REGISTRO_NO_ENCONTRADO
 }

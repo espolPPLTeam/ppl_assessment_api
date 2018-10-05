@@ -82,6 +82,18 @@ PreguntasModel.statics = {
         resolve(!!accionEstado)
       })
     })
+  },
+  BulkInsert (arrayPreguntas) {
+    const self = this
+    return new Promise((resolve, reject) => {
+      self.insertMany(arrayPreguntas, { ordered: true })
+        .then((doc) => {
+          resolve(doc)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
   }
 }
 

@@ -1,5 +1,5 @@
 ## Verbos nombrado apis:
-
+* Crear
 * Obtener
 * Eliminar
 * Anadir

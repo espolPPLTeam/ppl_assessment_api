@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 mongoose.set('useCreateIndex', true)
-mongoose.Promise = Promise
+mongoose.Promise = require('bluebird')
 var db
 
 let Conectar = function (url) {
